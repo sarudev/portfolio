@@ -14,3 +14,9 @@ body {
   font-family: JetBrains Mono, monospace;
   background-color: #242424;
 }
+
+@keyframes write {
+  to {
+    width: var(--real-width);
+  }
+}

@@ -1,8 +1,26 @@
-import React, { ReactElement } from 'react'
+import React, { forwardRef, ReactElement, useEffect, useRef } from 'react'
+
+const delayBlink = 300
+const durationCh = 75
+const initialDelay = 500
 
 function App (): ReactElement {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    let delay = initialDelay
+    ref.current?.childNodes.forEach(e => {
+      const elem = e as HTMLDivElement
+      const length = elem.textContent!.length
+      const animationDuration = durationCh * length
+      elem.style.setProperty('--real-width', `${length}ch`)
+      elem.style.animation = `write ${animationDuration}ms steps(${length}) forwards ${delay}ms`
+      delay += animationDuration
+    })
+  }, [])
+
   return (
-    <Lines>
+    <Lines ref={ref}>
       <Line>
         <ComponentSign open />
         <Component name='Sarudev' />
@@ -23,15 +41,17 @@ function App (): ReactElement {
   )
 }
 
-function Lines ({ children }: { children: ReactElement | ReactElement[] }): ReactElement {
+const Lines = forwardRef<HTMLDivElement, { children: ReactElement | ReactElement[] }>(function lines ({ children }, ref) {
   return (
-    <div>{ children }</div>
+    <div className='w-[25ch]' ref={ref}>
+      {children}
+    </div>
   )
-}
+})
 
 function Line ({ indent = 0, children }: { indent?: number, children: ReactElement | ReactElement[] }): ReactElement {
   return (
-    <div>{'\u00A0'.repeat(indent)}{ children }</div>
+    <div className='w-0 overflow-hidden whitespace-nowrap'>{'\u00A0'.repeat(indent)}{ children }</div>
   )
 }
 
@@ -43,7 +63,7 @@ function ComponentSign ({ open }: { open?: boolean }): ReactElement {
 
 function Component ({ name }: { name: string }): ReactElement {
   return (
-    <span className='text-[#4ec9b0]'>{name}</span>
+    <span className='text-[#4ec9b0]' id='sarudev'>{name}</span>
   )
 }
 
@@ -59,11 +79,5 @@ function Prop ({ name, type, value }: { name: string, type: 'string' | 'number' 
     <span className='text-[#9cdcfe]'>{name}<span className='text-[#d4d4d4]'>=</span>{propValue}</span>
   )
 }
-
-// #808080 #4ec9b0
-// #9cdcfe #d4d4d4 #ce9178
-// #9cdcfe #d4d4d4 #569cd6 #9cdcfe #569cd6
-// #9cdcfe #d4d4d4 #569cd6 #b5cea8 #569cd6
-// #808080
 
 export default App
