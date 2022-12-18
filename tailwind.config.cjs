@@ -8,6 +8,9 @@ module.exports = {
     extend: {
       fontFamily: {
         JetBrainsMono: 'JetBrains Mono, monospace'
+      },
+      boxShadow: {
+        line: '0px 5px #282828, 0px -5px #282828'
       }
     }
   },

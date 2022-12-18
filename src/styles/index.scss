@@ -12,11 +12,28 @@ body {
   min-height: 100vh;
   font-size: 80px;
   font-family: JetBrains Mono, monospace;
-  background-color: #242424;
+  line-height: 100px;
+  background-color: #1e1e1e;
+}
+
+.home-lines {
+  --line-opacity: 0;
 }
 
 @keyframes write {
   to {
     width: var(--real-width);
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    box-shadow: 5px 0px #707070;
+  }
+
+  50% {
+    box-shadow: 5px 0px transparent;
   }
 }
