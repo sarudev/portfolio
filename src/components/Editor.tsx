@@ -47,6 +47,8 @@ export const ContentStyled = styled.div<{ delay: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(45deg, rgba(255,0,0,1) 0%, rgba(0,50,255,1) 100%);
+  background-color: #1e1e1e;
   animation: 1s ${contentRezise} ease-in-out ${p => p.delay + 500}ms forwards;
 `
+
+// linear-gradient(45deg, rgba(255,0,0,1) 0%, rgba(0,50,255,1) 100%)

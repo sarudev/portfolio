@@ -18,7 +18,7 @@ function Editor (): ReactElement {
         <Tabs tabsName={tabsName} />
       </HeaderStyled>
       <Content tabsName={tabsName}>
-        <Home blinkDuration={750} durationCh={1} initialDelay={1500} loaded={visitedTabList.length > 1} className='animation-[home-margin_1s]' />
+        <Home blinkDuration={750} durationCh={75} initialDelay={1500} loaded={visitedTabList.length > 1} className='animation-[home-margin_1s]' />
         {null}
         {null}
         {null}
