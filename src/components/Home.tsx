@@ -2,18 +2,18 @@ import React, { forwardRef, ReactElement, useEffect, useRef } from 'react'
 
 export const Lines = forwardRef<HTMLDivElement, { children: ReactElement | ReactElement[] }>(function lines ({ children }, ref) {
   return (
-    <div className='home-lines w-[25ch]' ref={ref}>
+    <div className="home-lines w-[25ch]" ref={ref}>
       {children}
     </div>
   )
 })
 
-export function Line ({ indent = 0, forwards, blinkDuration, loaded, children }: { indent?: number, forwards?: boolean, blinkDuration: number, loaded: boolean, children: ReactElement | ReactElement[] }): ReactElement {
+export function Line ({ indent = 0, forwards, blinkDuration, loaded, children }: ILine): ReactElement {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const elem = ref.current! as HTMLDivElement
     if (loaded && forwards) {
-      const elem = ref.current! as HTMLDivElement
       elem.style.animation = `blink ${blinkDuration}ms infinite`
     }
   }, [])
@@ -36,7 +36,7 @@ export function Line ({ indent = 0, forwards, blinkDuration, loaded, children }:
     : 'before:opacity-[var(--line-opacity)]'
 
   return (
-    <div ref={ref} data-forwards={forwards} data-indent={indent > 0} className={`${width} ${boxShadow} overflow-hidden whitespace-nowrap before:z-[-1] before:content-[''] before:absolute before:left-0 before:w-[100%] before:h-[100px] before:shadow-line ${beforeOpacity}`}>
+    <div ref={ref} data-forwards={forwards} data-indent={indent > 0} className={`${width} ${boxShadow} flex m-0 overflow-hidden whitespace-nowrap before:z-[-1] before:content-['A'] before:text-[transparent] before:absolute before:left-0 before:w-[100%] before:shadow-line ${beforeOpacity} pointer-events-none`}>
       {'\u00A0'.repeat(indent)}{ children }
     </div>
   )

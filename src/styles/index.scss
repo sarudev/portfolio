@@ -4,20 +4,34 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  font-size: 80px;
+  font-size: 4rem;
   font-family: JetBrains Mono, monospace;
-  line-height: 100px;
+  font-weight: 400;
   background-color: #1e1e1e;
 }
 
 .home-lines {
   --line-opacity: 0;
+}
+
+.home-lines * {
+  pointer-events: all;
+}
+
+.header-tabs * {
+  pointer-events: all;
 }
 
 @keyframes write {
@@ -30,10 +44,19 @@ body {
 
   0%,
   100% {
-    box-shadow: 5px 0px #707070;
+    box-shadow: 5px 0px transparent;
   }
 
   50% {
-    box-shadow: 5px 0px transparent;
+    box-shadow: 5px 0px #707070;
+  }
+}
+
+@keyframes home-margin {
+  to {
+    margin-left: 48px;
+    margin-top: 35px;
+    width: calc(100% - 48px);
+    height: calc(100% - 35px);
   }
 }

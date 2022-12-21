@@ -1,6 +1,9 @@
 import { RefObject, useEffect, useRef } from 'react'
+import { useAppDispatch } from '@/components/Redux'
+import { setDelay } from '@/redux/reducers/delay'
 
-function useApplyStyles ({ blinkDuration, durationCh, initialDelay, loaded }: { blinkDuration: number, durationCh: number, initialDelay: number, loaded: boolean }): RefObject<HTMLDivElement> {
+function useApplyStyles ({ blinkDuration, durationCh, initialDelay, loaded }: IuseApplyStyles): RefObject<HTMLDivElement> {
+  const dispatch = useAppDispatch()
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -32,6 +35,7 @@ function useApplyStyles ({ blinkDuration, durationCh, initialDelay, loaded }: { 
 
         delay += animationDuration
       })
+      dispatch(setDelay(delay))
     }
   }, [])
 
