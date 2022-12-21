@@ -33,7 +33,7 @@ function Content ({ tabsName, children }: IContent): ReactElement {
 
   return (
     <ContentStyled delay={homeDelay}>
-      {tabsName.map((name, i) => currentTabName === name ? children[i] || <div key={i}>a</div> : null)}
+      {tabsName.map((name, i) => currentTabName === name ? children[i] || null : null)}
     </ContentStyled>
   )
 }
