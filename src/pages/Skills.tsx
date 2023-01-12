@@ -96,6 +96,7 @@ const card = {
   transform: 'translateZ(50px)',
   position: 'absolute' as 'absolute',
   opacity: 0,
+  pointerEvents: 'none',
   transition: `opacity ${timing} ${bezier}`
 }
 
@@ -131,6 +132,7 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage }: ICard): Re
           cardChildren.forEach(child => {
             child.style.opacity = cardStyles.default.opacity
             child.style.borderRadius = cardStyles.default.borderRadius
+            child.style.pointerEvents = cardStyles.default.pointerEvents
           })
 
           setClicked(false)
@@ -150,6 +152,7 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage }: ICard): Re
           cardChildren.forEach(child => {
             child.style.opacity = cardStyles.hover.opacity
             child.style.borderRadius = cardStyles.hover.borderRadius
+            child.style.pointerEvents = cardStyles.hover.pointerEvents
           })
         }}
         onClick={(e) => {
@@ -166,6 +169,7 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage }: ICard): Re
           cardChildren.forEach(child => {
             child.style.opacity = cardStyles[currentState].opacity
             child.style.borderRadius = cardStyles[currentState].borderRadius
+            child.style.pointerEvents = cardStyles[currentState].pointerEvents
             child.style.pointerEvents = cardStyles[currentState].pointerEvents
           })
 
@@ -184,7 +188,8 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage }: ICard): Re
           backgroundPosition: 'center',
           backgroundSize: '100%',
           objectFit: 'cover',
-          transformStyle: 'preserve-3d'
+          transformStyle: 'preserve-3d',
+          cursor: 'pointer'
         }}
       >
         <div style={{
