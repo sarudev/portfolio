@@ -126,7 +126,7 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage }: ICard): Re
           card.style.borderRadius = cardStyles.default.borderRadius
           card.style.transform = 'none'
           setTimeout(() => {
-            card.parentElement!.style.zIndex = '0'
+            card.parentElement!.style.zIndex = cardStyles.default.zIndex
           }, 150)
 
           cardChildren.forEach(child => {
@@ -146,7 +146,7 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage }: ICard): Re
           card.style.height = cardStyles.hover.height
           card.style.borderRadius = cardStyles.hover.borderRadius
           setTimeout(() => {
-            card.parentElement!.style.zIndex = '5'
+            card.parentElement!.style.zIndex = cardStyles.hover.zIndex
           }, 150)
 
           cardChildren.forEach(child => {
