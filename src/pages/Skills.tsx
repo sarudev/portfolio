@@ -5,7 +5,7 @@ import javascript from '../assets/javascript.svg'
 import typescript from '../assets/typescript.svg'
 
 const CardContainer = styled.div`
-  padding: 100px 100px;
+  padding: 120px 120px;
   display: flex;
   flex-wrap: wrap;
   align-items: space-evenly;
@@ -16,8 +16,19 @@ function Skills (): ReactElement {
   return (
     <CardContainer>
       <Card icon={react} name={'React'} percentage={0} mainColor={'#0FF'} secondaryColor={'black'}/>
-      <Card icon={javascript} name={'Javascript'} percentage={50} mainColor={'#FF0'} secondaryColor={'black'}/>
-      <Card icon={typescript} name={'Typescript'} percentage={100} mainColor={'#007acc'} secondaryColor={'black'}/>
+      <Card icon={javascript} name={'Javascript'} percentage={8} mainColor={'#FF0'} secondaryColor={'black'}/>
+      <Card icon={typescript} name={'Typescript'} percentage={16} mainColor={'#007acc'} secondaryColor={'black'}/>
+      <Card icon={react} name={'React'} percentage={24} mainColor={'#0FF'} secondaryColor={'black'}/>
+      <Card icon={javascript} name={'Javascript'} percentage={32} mainColor={'#FF0'} secondaryColor={'black'}/>
+      <Card icon={typescript} name={'Typescript'} percentage={40} mainColor={'#007acc'} secondaryColor={'black'}/>
+      <Card icon={react} name={'React'} percentage={48} mainColor={'#0FF'} secondaryColor={'black'}/>
+      <Card icon={javascript} name={'Javascript'} percentage={56} mainColor={'#FF0'} secondaryColor={'black'}/>
+      <Card icon={typescript} name={'Typescript'} percentage={64} mainColor={'#007acc'} secondaryColor={'black'}/>
+      <Card icon={react} name={'React'} percentage={72} mainColor={'#0FF'} secondaryColor={'black'}/>
+      <Card icon={javascript} name={'Javascript'} percentage={80} mainColor={'#FF0'} secondaryColor={'black'}/>
+      <Card icon={typescript} name={'Typescript'} percentage={88} mainColor={'#007acc'} secondaryColor={'black'}/>
+      <Card icon={react} name={'React'} percentage={92} mainColor={'#0FF'} secondaryColor={'black'}/>
+      <Card icon={javascript} name={'Javascript'} percentage={100} mainColor={'#FF0'} secondaryColor={'black'}/>
     </CardContainer>
   )
 }
