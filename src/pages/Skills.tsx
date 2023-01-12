@@ -43,7 +43,7 @@ const cardStyles = {
     borderRadius: '50%',
     transition: transitions,
     opacity: '0',
-    zIndex: '0',
+    zIndex: '5',
     pointerEvents: 'none'
   },
   clicked: {
@@ -52,7 +52,7 @@ const cardStyles = {
     borderRadius: '20px',
     transition: transitions,
     opacity: '1',
-    zIndex: '5',
+    zIndex: '0',
     pointerEvents: 'all'
   }
 }
