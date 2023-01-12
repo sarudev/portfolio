@@ -107,7 +107,7 @@ const card = {
   transform: 'translateZ(50px)',
   position: 'absolute' as 'absolute',
   opacity: 0,
-  pointerEvents: 'none',
+  pointerEvents: 'none' as 'none',
   transition: `opacity ${timing} ${bezier}`
 }
 
