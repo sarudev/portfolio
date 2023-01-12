@@ -30,6 +30,48 @@ interface ICard {
   secondaryColor: string
   name: string
   percentage: number
+  backgroundSize: string
+}
+
+interface IUseTilt {
+  onMouseMove: ({ card, clientX, clientY }: { card: HTMLDivElement, clientX: number, clientY: number }) => boolean
+  onMouseLeave: (card: HTMLDivElement) => boolean
+  onMouseEnter: (card: HTMLDivElement) => boolean
+  onClick: (card: HTMLDivElement) => boolean
+}
+
+interface IUseTiltConfig {
+  styles?: {
+    default?: {
+      width: string
+      height: string
+      borderRadius: string
+      transition: string
+    }
+    hover?: {
+      width: string
+      height: string
+      borderRadius: string
+      transition: string
+    }
+    clicked?: {
+      width: string
+      height: string
+      borderRadius: string
+      transition: string
+    }
+  }
+  config?: {
+    clickedHoverMultiplier?: number
+    defaultHoverMulitplier?: number
+    inverted?: boolean
+  }
+  debug?: {
+    styles?: {
+      timing?: string
+      bezier?: string
+    }
+  }
 }
 
 type IuseApplyStyles = Omit<IHome, 'className'>
