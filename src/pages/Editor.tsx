@@ -5,7 +5,7 @@ import { useAppSelector } from '@/components/Redux'
 import { ContentStyled, HeaderStyled, SidebarStyled } from '@/components/Editor'
 import Skills from './Skills'
 
-const tabsName = ['Home', 'Skills', 'Proyects', 'Contact']
+const tabsName = ['Skills', 'Home', 'Proyects', 'Contact']
 const blinkDuration = 750
 const durationCh = 75
 const initialDelay = 1500

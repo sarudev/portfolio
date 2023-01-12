@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "^1.9.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-parallax-tilt": "^1.7.85",
     "react-redux": "^8.0.5",
     "sass": "1.56.2",
     "styled-components": "5.3.6",

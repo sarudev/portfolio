@@ -24,4 +24,12 @@ interface ILine {
   children: ReactElement | ReactElement[]
 }
 
+interface ICard {
+  icon: string
+  mainColor: string
+  secondaryColor: string
+  name: string
+  percentage: number
+}
+
 type IuseApplyStyles = Omit<IHome, 'className'>

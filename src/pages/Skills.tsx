@@ -1,6 +1,8 @@
 import React, { ReactElement, useState } from 'react'
 import styled from 'styled-components'
 import react from '../assets/react.svg'
+import javascript from '../assets/javascript.svg'
+import typescript from '../assets/typescript.svg'
 
 const CardContainer = styled.div`
   padding: 100px 100px;
@@ -13,169 +15,202 @@ const CardContainer = styled.div`
 function Skills (): ReactElement {
   return (
     <CardContainer>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
-      <Card icon={react}/>
+      <Card icon={react} name={'React'} percentage={0} mainColor={'#0FF'} secondaryColor={'black'}/>
+      <Card icon={javascript} name={'Javascript'} percentage={50} mainColor={'#FF0'} secondaryColor={'black'}/>
+      <Card icon={typescript} name={'Typescript'} percentage={100} mainColor={'#007acc'} secondaryColor={'black'}/>
     </CardContainer>
   )
 }
 
 export default Skills
+const timing = '.25s'
+const bezier = 'ease-in-out'
+const transitions = ['width', 'height', 'border-radius'].map(t => `${t} ${timing} ${bezier}`).join(', ')
 
-const RealContainer = styled.div`
-  outline: 1px red solid;
-  width: 250px;
-  height: 250px;
+const cardStyles = {
+  default: {
+    width: '150px',
+    height: '150px',
+    borderRadius: '50%',
+    transition: `transform ${timing} ${bezier}, ${transitions}`,
+    opacity: '0',
+    zIndex: '0',
+    pointerEvents: 'none'
+  },
+  hover: {
+    width: '200px',
+    height: '200px',
+    borderRadius: '50%',
+    transition: transitions,
+    opacity: '0',
+    zIndex: '0',
+    pointerEvents: 'none'
+  },
+  clicked: {
+    width: '400px',
+    height: '400px',
+    borderRadius: '20px',
+    transition: transitions,
+    opacity: '1',
+    zIndex: '5',
+    pointerEvents: 'all'
+  }
+}
+
+const Container = styled.div`
+  // outline: 1px red solid;
+  width: 200px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-`
-
-const Container = styled.div`
-  outline: 1px green solid;
   perspective: 1200px;
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-  transition: width .25s ease-in-out, height .25s ease-in-out, border-radius .25s ease-in-out;
 `
 
-const CardStyled = styled.div<{ icon: string }>`
-  outline: 1px yellow solid;
-  width: 200px;
-  height: 200px;
-  position: relative;
+const CardStyled = styled.div<{ icon: string, mainColor: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 1px ${props => props.mainColor} solid;
+  width: ${cardStyles.default.width};
+  height: ${cardStyles.default.height};
+  border-radius: ${cardStyles.default.borderRadius};
+  backdrop-filter: blur(10px);
+  position: absolute;
   background-image: url(${props => props.icon});
   background-position: center;
   background-size: 100%;
-  border-radius: 50%;
-  object-fit: cover;
   transform-style: preserve-3d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: width .25s ease-in-out, height .25s ease-in-out, border-radius .25s ease-in-out;
+  object-fit: cover;
 `
 
-function Card ({ icon }: { icon: string }): ReactElement {
+function pickHex (start: [number, number, number], end: [number, number, number], position: number): [number, number, number] {
+  const w1 = position
+  const w2 = 1 - w1
+  return [Math.round(start[0] * w1 + end[0] * w2), Math.round(start[1] * w1 + end[1] * w2), Math.round(start[2] * w1 + end[2] * w2)]
+}
+
+const card = {
+  width: '100%',
+  height: '100%',
+  transform: 'translateZ(50px)',
+  position: 'absolute' as 'absolute',
+  opacity: 0,
+  transition: `opacity ${timing} ${bezier}`
+}
+
+function Card ({ icon, mainColor, secondaryColor, name, percentage }: ICard): ReactElement {
   const [clicked, setClicked] = useState(false)
 
   return (
-    <RealContainer>
-      <Container
+    <Container>
+      <div
         onMouseMove={(e) => {
-          const container = e.currentTarget
-          const card = container.firstChild! as HTMLDivElement
+          const card = e.currentTarget
 
-          const xCoord = e.clientX - container.getBoundingClientRect().left
-          const yCoord = e.clientY - container.getBoundingClientRect().top
-          const xAxis = (container.clientWidth / 2 - xCoord) / (clicked ? 10 : 4)
-          const yAxis = (container.clientHeight / 2 - yCoord) / (clicked ? 10 : 4)
+          const xCoord = e.clientX - card.getBoundingClientRect().left
+          const yCoord = e.clientY - card.getBoundingClientRect().top
+          const xAxis = (card.clientWidth / 2 - xCoord) / (clicked ? 10 : 4)
+          const yAxis = (card.clientHeight / 2 - yCoord) / (clicked ? 10 : 4)
 
           card.style.transform = `rotateX(${yAxis}deg) rotateY(${-xAxis}deg)`
         }}
         onMouseLeave={(e) => {
-          const container = e.currentTarget
-          const card = container.firstChild! as HTMLDivElement
+          const card = e.currentTarget
+          const cardChildren = card.childNodes! as NodeListOf<HTMLElement>
 
-          card.style.width = '200px'
-          card.style.height = '200px'
-          card.style.borderRadius = '50%'
-          card.style.transition = 'transform .25s ease-in-out, width .25s ease-in-out, height .25s ease-in-out, border-radius .25s ease-in-out'
+          card.style.transition = cardStyles.default.transition
+          card.style.width = cardStyles.default.width
+          card.style.height = cardStyles.default.height
+          card.style.borderRadius = cardStyles.default.borderRadius
           card.style.transform = 'none'
+          setTimeout(() => {
+            card.parentElement!.style.zIndex = '0'
+          }, 150)
 
-          container.style.borderRadius = '50%'
-          container.style.width = '200px'
-          container.style.height = '200px'
-          container.style.zIndex = '0'
+          cardChildren.forEach(child => {
+            child.style.opacity = cardStyles.default.opacity
+            child.style.borderRadius = cardStyles.default.borderRadius
+          })
 
           setClicked(false)
         }}
         onMouseEnter={(e) => {
-          const container = e.currentTarget
-          const card = container.firstChild! as HTMLDivElement
+          const card = e.currentTarget
+          const cardChildren = card.childNodes! as NodeListOf<HTMLElement>
 
-          card.style.transition = 'width .25s ease-in-out, height .25s ease-in-out, border-radius .25s ease-in-out'
-          card.style.width = '250px'
-          card.style.height = '250px'
+          card.style.transition = cardStyles.hover.transition
+          card.style.width = cardStyles.hover.width
+          card.style.height = cardStyles.hover.height
+          card.style.borderRadius = cardStyles.hover.borderRadius
+          setTimeout(() => {
+            card.parentElement!.style.zIndex = '5'
+          }, 150)
 
-          container.style.width = '250px'
-          container.style.height = '250px'
+          cardChildren.forEach(child => {
+            child.style.opacity = cardStyles.hover.opacity
+            child.style.borderRadius = cardStyles.hover.borderRadius
+          })
         }}
         onClick={(e) => {
-          const container = e.currentTarget
-          const card = container.firstChild! as HTMLDivElement
+          const card = e.currentTarget
+          const cardChildren = card.childNodes! as NodeListOf<HTMLElement>
+          const currentState: 'hover' | 'clicked' = clicked
+            ? 'hover'
+            : 'clicked'
 
-          if (clicked) {
-            card.style.width = '250px'
-            card.style.height = '250px'
-            card.style.borderRadius = '50%'
+          card.style.width = cardStyles[currentState].width
+          card.style.height = cardStyles[currentState].height
+          card.style.borderRadius = cardStyles[currentState].borderRadius
 
-            container.style.width = '250px'
-            container.style.height = '250px'
-            container.style.borderRadius = '50%'
-          } else {
-            card.style.width = '400px'
-            card.style.height = '400px'
-            card.style.borderRadius = '20px'
+          cardChildren.forEach(child => {
+            child.style.opacity = cardStyles[currentState].opacity
+            child.style.borderRadius = cardStyles[currentState].borderRadius
+            child.style.pointerEvents = cardStyles[currentState].pointerEvents
+          })
 
-            container.style.width = '400px'
-            container.style.height = '400px'
-            container.style.borderRadius = '20px'
-          }
-          container.style.zIndex = '5'
           setClicked(c => !c)
         }}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          outline: `1px ${mainColor} solid`,
+          width: cardStyles.default.width,
+          height: cardStyles.default.height,
+          borderRadius: cardStyles.default.borderRadius,
+          position: 'absolute',
+          backgroundImage: `url(${icon})`,
+          backgroundPosition: 'center',
+          backgroundSize: '100%',
+          objectFit: 'cover',
+          transformStyle: 'preserve-3d'
+        }}
       >
-        <CardStyled icon={icon}>
-
-        </CardStyled>
-      </Container>
-    </RealContainer>
+        <div style={{
+          ...card,
+          backdropFilter: 'blur(10px)',
+          transform: 'translateZ(50px)'
+        }}/>
+        <div style={{
+          ...card,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transform: 'translateZ(100px)',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textShadow: `${secondaryColor} 0 0 20px, ${secondaryColor} 0 0 20px, ${secondaryColor} 0 0 20px, ${secondaryColor} 0 0 20px`
+        }}>
+          <span style={{ color: mainColor }}>
+            {name}
+          </span>
+          <span style={{ color: `rgba(${pickHex([0, 255, 0], [255, 0, 0], percentage / 100)}, 7.5)` }}>
+            {percentage}%
+          </span>
+        </div>
+      </div>
+    </Container>
   )
 }
