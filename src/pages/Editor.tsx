@@ -5,7 +5,7 @@ import { useAppSelector } from '@/components/Redux'
 import { ContentStyled, HeaderStyled, SidebarStyled } from '@/components/Editor'
 import Skills from './Skills'
 
-const tabsName = ['Skills', 'Home', 'Proyects', 'Contact']
+const tabsName = ['Home', 'Skills', 'Proyects', 'Contact']
 const blinkDuration = 750
 const durationCh = 75
 const initialDelay = 1500
@@ -23,8 +23,8 @@ function Editor (): ReactElement {
         <Tabs tabsName={tabsName} />
       </HeaderStyled>
       <Content tabsName={tabsName}>
-        <Skills/>
         <Home blinkDuration={blinkDuration} durationCh={durationCh} initialDelay={initialDelay} loaded={visitedTabList.length > 1} className='animation-[home-margin_1s]' />
+        <Skills/>
         {null}
         {null}
       </Content>
