@@ -1,6 +1,7 @@
 import React, { ReactElement, CSSProperties } from 'react'
 import pickHex from '@/helpers/pickHex'
 import useTilt from '@/hooks/useTile'
+import styled from 'styled-components'
 
 function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSize }: ICard): ReactElement {
   const { onMouseMove, onMouseEnter, onMouseLeave, onClick } = useTilt({ styles: cardStyles })
@@ -13,6 +14,8 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
     const cardChildren = card.childNodes! as NodeListOf<HTMLElement>
 
     onMouseEnter(card)
+    card.style.setProperty('--after-width', cardStyles.hover.width)
+    card.style.setProperty('--after-height', cardStyles.hover.height)
     setTimeout(() => {
       card.parentElement!.style.zIndex = cardStyles.hover.zIndex
     }, 150)
@@ -30,6 +33,10 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
     const cardChildren = card.childNodes! as NodeListOf<HTMLElement>
 
     onMouseLeave(card)
+    card.style.setProperty('--after-width', cardStyles.default.width)
+    card.style.setProperty('--after-border-radius', cardStyles.default.borderRadius)
+    card.style.setProperty('--after-height', cardStyles.default.height)
+    card.style.setProperty('--after-translate', '25px')
     setTimeout(() => {
       card.parentElement!.style.zIndex = cardStyles.default.zIndex
     }, 150)
@@ -50,6 +57,10 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
       ? 'clicked'
       : 'hover'
 
+    card.style.setProperty('--after-width', cardStyles[currentState].width)
+    card.style.setProperty('--after-height', cardStyles[currentState].height)
+    card.style.setProperty('--after-border-radius', cardStyles[currentState].borderRadius)
+    card.style.setProperty('--after-translate', clicked ? '0' : '25px')
     cardChildren.forEach(child => {
       child.style.width = cardStyles[currentState].width
       child.style.height = cardStyles[currentState].height
@@ -60,14 +71,15 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
   }
 
   return (
-    <div style={styles.container()}
-    >
-      <div
+    <ContainerStyled>
+      <CardStyled
+        mainColor={mainColor}
+        icon={icon}
+        backgroundSize={backgroundSize}
         onMouseMove={handleOnMouseMove}
         onMouseLeave={handleOnMouseLeave}
         onMouseEnter={handleOnMouseEnter}
         onClick={handleOnClick}
-        style={styles.card(mainColor, icon, backgroundSize)}
       >
         <div style={styles.firstChild(mainColor)}/>
         <div style={styles.lastChild(mainColor, secondaryColor)}>
@@ -78,8 +90,8 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
             {percentage}%
           </span>
         </div>
-      </div>
-    </div>
+      </CardStyled>
+    </ContainerStyled>
   )
 }
 
@@ -179,3 +191,46 @@ const styles: { container: () => CSSProperties, card: (mainColor: string, icon: 
     userSelect: 'none'
   })
 }
+
+const ContainerStyled = styled.div`
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 10000px;
+`
+
+const CardStyled = styled.div<{ mainColor: string, icon: string, backgroundSize: string }>`
+  outline: 1px ${props => props.mainColor} solid;
+  position: absolute;
+  width: ${cardStyles.default.width};
+  height: ${cardStyles.default.height};
+  border-radius: ${cardStyles.default.borderRadius};
+  transition: ${cardStyles.default.transition};
+  transform-style: preserve-3d;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  --after-width: ${cardStyles.default.width};
+  --after-height: ${cardStyles.default.height};
+  --after-border-radius: ${cardStyles.default.borderRadius};
+  --after-translate: 25px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: var(--after-width);
+    height: var(--after-height);
+    border-radius: var(--after-border-radius);
+    transition: ${cardStyles.default.transition};
+    background-image: url(${props => props.icon});
+    background-position: center;
+    background-size: ${props => props.backgroundSize};
+    background-repeat: no-repeat;
+    object-fit: cover;
+    transform: translateZ(var(--after-translate));
+  }
+`

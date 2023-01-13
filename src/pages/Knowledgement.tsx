@@ -19,7 +19,7 @@ const CardContainer = styled.div`
   justify-content: space-evenly;
 `
 
-function Skills (): ReactElement {
+function Knowledgement (): ReactElement {
   return (
     <CardContainer>
       <Card icon={mongo} name={'Mongo'} percentage={60} backgroundSize={'95%'} mainColor={'#69b655'} secondaryColor={'black'}/>
@@ -35,4 +35,4 @@ function Skills (): ReactElement {
   )
 }
 
-export default Skills
+export default Knowledgement

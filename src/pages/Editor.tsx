@@ -3,9 +3,9 @@ import Home from '@/pages/Home'
 import Tabs from '@/components/Tabs'
 import { useAppSelector } from '@/components/Redux'
 import { ContentStyled, HeaderStyled, SidebarStyled } from '@/components/Editor'
-import Skills from './Skills'
+import Knowledgement from '@/pages/Knowledgement'
 
-const tabsName = ['Home', 'Skills', 'Proyects', 'Contact']
+const tabsName = ['Knowledgement', 'Home', 'Proyects', 'Contact']
 const blinkDuration = 750
 const durationCh = 75
 const initialDelay = 1500
@@ -23,8 +23,8 @@ function Editor (): ReactElement {
         <Tabs tabsName={tabsName} />
       </HeaderStyled>
       <Content tabsName={tabsName}>
+        <Knowledgement/>
         <Home blinkDuration={blinkDuration} durationCh={durationCh} initialDelay={initialDelay} loaded={visitedTabList.length > 1} className='animation-[home-margin_1s]' />
-        <Skills/>
         {null}
         {null}
       </Content>
