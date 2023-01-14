@@ -1,4 +1,4 @@
-import React, { memo, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { Lines, Line, ComponentSign, Component, Prop } from '@/components/Home'
 import useApplyStyles from '@/hooks/useApplyStyles'
 import styled from 'styled-components'
