@@ -2,7 +2,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import store from '@/redux/store.js'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, HashRouter } from 'react-router-dom'
 import Home from './pages/Home'
 import Knowledgement from './pages/Knowledgement'
 import Editor from '@/pages/Editor'
@@ -15,7 +15,7 @@ const initialDelay = 1500
 createRoot(document.querySelector('#root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
           <Routes>
             <Route path='/' element={<Editor/>}>
               <Route index element={<Home blinkDuration={blinkDuration} durationCh={durationCh} initialDelay={initialDelay} loaded={false} />}/>
@@ -24,7 +24,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               <Route path='*' element={<div>Not found</div>} />
             </Route>
           </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   </React.StrictMode>
 )
