@@ -36,8 +36,13 @@ function useApplyStyles ({ blinkDuration, durationCh, initialDelay, loaded }: Iu
         delay += animationDuration
       })
       dispatch(setDelay(delay))
+    } else {
+      ref.current?.childNodes.forEach((e, i) => {
+        const elem = e as HTMLDivElement
+        elem.removeAttribute('style')
+      })
     }
-  }, [])
+  }, [loaded])
 
   return ref
 }

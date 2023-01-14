@@ -1,45 +1,25 @@
 import React, { ReactElement } from 'react'
-import Home from '@/pages/Home'
 import Tabs from '@/components/Tabs'
 import { useAppSelector } from '@/components/Redux'
-import { ContentStyled, HeaderStyled, SidebarStyled } from '@/components/Editor'
-import Knowledgement from '@/pages/Knowledgement'
+import { HeaderStyled, SidebarStyled } from '@/components/Editor'
+import { Outlet, useLocation } from 'react-router-dom'
 
-const tabsName = ['Knowledgement', 'Home', 'Proyects', 'Contact']
-const blinkDuration = 750
-const durationCh = 75
-const initialDelay = 1500
+const tabsName = ['Home', 'Knowledgement', 'Proyects', 'Contact']
 
-function Editor (): ReactElement {
+function Editor ({ children }: { children?: ReactElement }): ReactElement {
   const homeDelay = useAppSelector(state => state.delay)
-  const visitedTabList = useAppSelector(state => state.visitedTabList)
+  const { pathname } = useLocation()
 
   return (
     <div className='absolute w-[100%] h-[100vh] bg-[#1e1e1e] top-0 left-0' >
-      <SidebarStyled delay={homeDelay}>
+      <SidebarStyled loaded={pathname !== '/'} delay={homeDelay}>
         {/* <SidebarMenu icon={svg} hoverName={'menu'} /> */}
       </SidebarStyled>
-      <HeaderStyled className='left-0 z-[100] header-tabs' delay={homeDelay}>
+      <HeaderStyled loaded={pathname !== '/'} delay={homeDelay} className='left-0 z-[100] header-tabs' >
         <Tabs tabsName={tabsName} />
       </HeaderStyled>
-      <Content tabsName={tabsName}>
-        <Knowledgement/>
-        <Home blinkDuration={blinkDuration} durationCh={durationCh} initialDelay={initialDelay} loaded={visitedTabList.length > 1} className='animation-[home-margin_1s]' />
-        {null}
-        {null}
-      </Content>
+      <Outlet/>
     </div>
-  )
-}
-
-function Content ({ tabsName, children }: IContent): ReactElement {
-  const homeDelay = useAppSelector(state => state.delay)
-  const currentTabName = useAppSelector(state => state.currentTabName)
-
-  return (
-    <ContentStyled delay={homeDelay}>
-      {tabsName.map((name, i) => currentTabName === name ? children[i] || null : null)}
-    </ContentStyled>
   )
 }
 

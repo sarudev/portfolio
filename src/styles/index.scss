@@ -60,3 +60,16 @@ body {
     height: calc(100% - 35px);
   }
 }
+
+@keyframes sidebarTranslateX {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes headerTranslateY {
+  to {
+    margin-left: 48px;
+    transform: translateY(0);
+  }
+}

@@ -12,8 +12,8 @@ export function Line ({ indent = 0, forwards, blinkDuration, loaded, children }:
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const elem = ref.current! as HTMLDivElement
-    if (loaded && forwards) {
+    const elem = ref.current as HTMLDivElement
+    if (loaded && forwards != null) {
       elem.style.animation = `blink ${blinkDuration}ms infinite`
     }
   }, [])
@@ -22,7 +22,7 @@ export function Line ({ indent = 0, forwards, blinkDuration, loaded, children }:
   const forwardsNo = indent > 0
     ? 'shadow-[inset_5px_0px_#aeafad]'
     : ''
-  const loadedYes = forwards
+  const loadedYes = (forwards != null)
     ? 'shadow-[5px_0px_#707070]'
     : forwardsNo
   const loadedNo = indent > 0
@@ -31,12 +31,12 @@ export function Line ({ indent = 0, forwards, blinkDuration, loaded, children }:
   const boxShadow = loaded
     ? loadedYes
     : loadedNo
-  const beforeOpacity = loaded && forwards
+  const beforeOpacity = loaded && (forwards != null)
     ? 'before:opacity-100'
     : 'before:opacity-[var(--line-opacity)]'
 
   return (
-    <div ref={ref} data-forwards={forwards} data-indent={indent > 0} className={`${width} ${boxShadow} flex m-0 overflow-hidden whitespace-nowrap before:z-[-1] before:content-['A'] before:text-[transparent] before:absolute before:left-0 before:w-[100%] before:shadow-line ${beforeOpacity} pointer-events-none`}>
+    <div ref={ref} data-forwards={forwards} data-indent={indent > 0} className={`${width} ${boxShadow} flex overflow-hidden whitespace-nowrap before:z-[-1] before:content-['A'] before:text-[transparent] before:absolute before:left-0 before:w-[100%] before:shadow-line ${beforeOpacity} pointer-events-none`}>
       {'\u00A0'.repeat(indent)}{ children }
     </div>
   )
@@ -44,7 +44,7 @@ export function Line ({ indent = 0, forwards, blinkDuration, loaded, children }:
 
 export function ComponentSign ({ open }: { open?: boolean }): ReactElement {
   return (
-    <span className='text-[#808080]'>{open ? '<' : '/>'}</span>
+    <span className='text-[#808080]'>{(open != null) && open ? '<' : '/>'}</span>
   )
 }
 

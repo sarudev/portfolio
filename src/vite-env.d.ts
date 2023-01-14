@@ -8,7 +8,6 @@ interface IHome {
   durationCh: number
   initialDelay: number
   loaded: boolean
-  className?: string
 }
 
 interface IContent {
@@ -72,6 +71,16 @@ interface IUseTiltConfig {
       bezier?: string
     }
   }
+}
+
+interface IContact {
+  id: number
+  first: string
+  last: string
+  avatar: string
+  twitter: string
+  notes: string
+  favorite: boolean
 }
 
 type IuseApplyStyles = Omit<IHome, 'className'>

@@ -1,35 +1,23 @@
 import styled, { keyframes } from 'styled-components'
 
-const sidebarTranslateX = keyframes`
-  to {
-    transform: translateX(0);
-  }
-`
-
-export const SidebarStyled = styled.div<{ delay: number }>`
+export const SidebarStyled = styled.div<{ loaded: boolean, delay: number }>`
   position: fixed;
   width: 48px;
   height: 100%;
   background-color: #333333;
-  transform: translateX(-48px);
-  animation: 1s ${sidebarTranslateX} ease-in-out ${p => p.delay + 500}ms forwards;
+  transform: translateX(${p => p.loaded ? '0' : '-48'}px);
+  animation: ${p => p.loaded ? 'none' : `1s sidebarTranslateX ease-in-out ${p.delay + 500}ms forwards`};
 `
 
-const headerTranslateY = keyframes`
-  to {
-    margin-left: 48px;
-    transform: translateY(0);
-  }
-`
-
-export const HeaderStyled = styled.div<{ delay: number }>`
+export const HeaderStyled = styled.div<{ loaded: boolean, delay: number }>`
   position: fixed;
   width: 100%;
   height: 35px;
   display: flex;
   background-color: #252526;
-  transform: translateY(-35px);
-  animation: 1s ${headerTranslateY} ease-in-out ${p => p.delay + 500}ms forwards;
+  margin-left: ${p => p.loaded ? '48' : '0'}px;
+  transform: translateY(${p => p.loaded ? '0' : '-35'}px);
+  animation: ${p => p.loaded ? 'none' : `1s headerTranslateY ease-in-out ${p.delay + 500}ms forwards`};
 `
 
 const contentRezise = keyframes`
