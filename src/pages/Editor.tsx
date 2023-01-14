@@ -11,7 +11,7 @@ function Editor ({ children }: { children?: ReactElement }): ReactElement {
   const { pathname } = useLocation()
 
   return (
-    <div className='absolute w-[100%] h-[100vh] bg-[#1e1e1e] top-0 left-0' >
+    <div className='absolute w-[100%] h-[100vh] bg-[#1e1e1e] top-0 left-0 flex' >
       <SidebarStyled loaded={pathname !== '/'} delay={homeDelay}>
         {/* <SidebarMenu icon={svg} hoverName={'menu'} /> */}
       </SidebarStyled>

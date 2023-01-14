@@ -7,10 +7,20 @@ import Home from './pages/Home'
 import Knowledgement from './pages/Knowledgement'
 import Editor from '@/pages/Editor'
 import '@/styles/index.scss'
+import styled from 'styled-components'
 
 const blinkDuration = 750
 const durationCh = 75
 const initialDelay = 1500
+
+const NotFoundStyled = styled.div`
+  width: calc(100% - 48px);
+  height: calc(100% - 35px);
+  margin: 35px 0 0 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
   <React.StrictMode>
@@ -21,7 +31,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               <Route index element={<Home blinkDuration={blinkDuration} durationCh={durationCh} initialDelay={initialDelay} loaded={false} />}/>
               <Route path='home' element={<Home blinkDuration={blinkDuration} durationCh={durationCh} initialDelay={initialDelay} loaded={true} />}/>
               <Route path='knowledgement' element={<Knowledgement />}/>
-              <Route path='*' element={<div>Not found</div>} />
+              <Route path='*' element={<NotFoundStyled>Not finished</NotFoundStyled>} />
             </Route>
           </Routes>
       </HashRouter>
