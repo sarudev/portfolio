@@ -28,9 +28,22 @@ function useApplyStyles ({ blinkDuration, durationCh, initialDelay, loaded }: Iu
             if (elem.dataset.indent !== 'true') {
               elem.style.boxShadow = '5px 0px transparent'
             } else {
-              elem.style.boxShadow = 'inset 5px 0px #aeafad, 5px 0px transparent'
+              elem.style.boxShadow = 'inset 2px 0px #aeafad, 2px 0px transparent'
             }
           }, delay + animationDuration)
+        }
+
+        if (i === ref.current!.childNodes.length - 1) {
+          setTimeout(() => {
+            ref.current!.childNodes.forEach((e, i) => {
+              if (i === 0 || i === ref.current!.childNodes.length - 1) {
+                return
+              }
+
+              const elem = e as HTMLDivElement
+              elem.style.boxShadow = 'inset 2px 0px #aeafad33'
+            })
+          }, delay + 150)
         }
 
         delay += animationDuration

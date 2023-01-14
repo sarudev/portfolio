@@ -11,7 +11,7 @@ module.exports = {
         'system-ui': 'system-ui, Ubuntu, Droid Sans, sans-serif'
       },
       boxShadow: {
-        line: '0px 5px #282828, 0px -5px #282828'
+        line: '0px 5px #282828cc, 0px -5px #282828cc'
       }
     }
   },

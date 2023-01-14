@@ -13,10 +13,12 @@ import redux from '@/assets/redux.svg'
 import sass from '@/assets/sass.svg'
 
 const CardContainer = styled.div`
-  padding: 120px 120px;
+  min-height: 100%;
+  padding: 120px;
   display: flex;
   flex-wrap: wrap;
   align-items: space-evenly;
+  align-content: space-evenly;
   justify-content: space-evenly;
 `
 

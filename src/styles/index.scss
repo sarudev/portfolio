@@ -20,6 +20,10 @@ body {
   font-family: JetBrains Mono, monospace;
   font-weight: 400;
   background-color: #1e1e1e;
+  position: relative;
+  box-sizing: border-box;
+  height: 100vh;
+  z-index: -100;
 }
 
 .home-lines {

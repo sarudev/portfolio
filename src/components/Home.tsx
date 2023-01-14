@@ -20,23 +20,23 @@ export function Line ({ indent = 0, forwards, blinkDuration, loaded, children }:
 
   const width = loaded ? 'w-[max-content]' : 'w-0'
   const forwardsNo = indent > 0
-    ? 'shadow-[inset_5px_0px_#aeafad]'
+    ? 'shadow-[inset_2px_0px_#aeafad33]'
     : ''
-  const loadedYes = (forwards != null)
+  const loadedYes = (forwards != null) && forwards
     ? 'shadow-[5px_0px_#707070]'
     : forwardsNo
   const loadedNo = indent > 0
-    ? 'shadow-[inset_5px_0px_#aeafad,5px_0px_#707070]'
+    ? 'shadow-[inset_2px_0px_#aeafad,5px_0px_#707070]'
     : 'shadow-[5px_0px_#707070]'
   const boxShadow = loaded
     ? loadedYes
     : loadedNo
-  const beforeOpacity = loaded && (forwards != null)
+  const beforeOpacity = loaded && (forwards != null) && forwards
     ? 'before:opacity-100'
     : 'before:opacity-[var(--line-opacity)]'
 
   return (
-    <div ref={ref} data-forwards={forwards} data-indent={indent > 0} className={`${width} ${boxShadow} flex overflow-hidden whitespace-nowrap before:z-[-1] before:content-['A'] before:text-[transparent] before:absolute before:left-0 before:w-[100%] before:shadow-line ${beforeOpacity} pointer-events-none`}>
+    <div ref={ref} data-forwards={forwards} data-indent={indent > 0} className={`${width} ${boxShadow} flex overflow-hidden whitespace-nowrap z-[0] before:z-[-5] before:content-['A'] before:text-[transparent] before:absolute before:left-0 before:w-[100%] before:shadow-line ${beforeOpacity} pointer-events-none`}>
       {'\u00A0'.repeat(indent)}{ children }
     </div>
   )

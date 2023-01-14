@@ -11,14 +11,12 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
   }
   const handleOnMouseEnter = (e: React.MouseEvent<HTMLDivElement, globalThis.MouseEvent>): void => {
     const card = e.currentTarget
-    const cardChildren = card.childNodes! as NodeListOf<HTMLElement>
+    const cardChildren = card.childNodes as NodeListOf<HTMLElement>
 
     onMouseEnter(card)
     card.style.setProperty('--after-width', cardStyles.hover.width)
     card.style.setProperty('--after-height', cardStyles.hover.height)
-    setTimeout(() => {
-      card.parentElement!.style.zIndex = cardStyles.hover.zIndex
-    }, 150)
+    card.parentElement!.style.zIndex = cardStyles.hover.zIndex
 
     cardChildren.forEach(child => {
       child.style.width = cardStyles.hover.width
@@ -30,16 +28,14 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
   }
   const handleOnMouseLeave = (e: React.MouseEvent<HTMLDivElement, globalThis.MouseEvent>): void => {
     const card = e.currentTarget
-    const cardChildren = card.childNodes! as NodeListOf<HTMLElement>
+    const cardChildren = card.childNodes as NodeListOf<HTMLElement>
 
     onMouseLeave(card)
     card.style.setProperty('--after-width', cardStyles.default.width)
     card.style.setProperty('--after-border-radius', cardStyles.default.borderRadius)
     card.style.setProperty('--after-height', cardStyles.default.height)
     card.style.setProperty('--after-translate', '25px')
-    setTimeout(() => {
-      card.parentElement!.style.zIndex = cardStyles.default.zIndex
-    }, 150)
+    card.parentElement!.style.zIndex = cardStyles.default.zIndex
 
     cardChildren.forEach(child => {
       child.style.width = cardStyles.default.width
@@ -51,7 +47,7 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
   }
   const handleOnClick = (e: React.MouseEvent<HTMLDivElement, globalThis.MouseEvent>): void => {
     const card = e.currentTarget
-    const cardChildren = card.childNodes! as NodeListOf<HTMLElement>
+    const cardChildren = card.childNodes as NodeListOf<HTMLElement>
     const clicked = onClick(card)
     const currentState: 'hover' | 'clicked' = clicked
       ? 'clicked'
@@ -86,7 +82,7 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
           <span style={{ color: mainColor }}>
             {name}
           </span>
-          <span style={{ color: `rgba(${pickHex([0, 255, 0], [255, 0, 0], percentage / 100)}, 7.5)` }}>
+          <span style={{ color: `rgba(${pickHex([0, 255, 0], [255, 0, 0], percentage / 100).join(', ')}, 7.5)` }}>
             {percentage}%
           </span>
         </div>
