@@ -12,5 +12,8 @@ export default defineConfig({
   appType: 'mpa',
   server: {
     open: true
+  },
+  build: {
+    manifest: true
   }
 })

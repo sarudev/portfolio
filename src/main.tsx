@@ -25,7 +25,7 @@ const NotFoundStyled = styled.div`
 createRoot(document.querySelector('#root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <HashRouter>
+      <BrowserRouter>
           <Routes>
             <Route path='/' element={<Editor/>}>
               <Route index element={<Home blinkDuration={blinkDuration} durationCh={durationCh} initialDelay={initialDelay} loaded={false} />}/>
@@ -34,7 +34,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               <Route path='*' element={<NotFoundStyled>Not finished</NotFoundStyled>} />
             </Route>
           </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 )
