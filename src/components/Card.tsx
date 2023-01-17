@@ -1,10 +1,38 @@
-import React, { ReactElement, CSSProperties } from 'react'
+import React, { ReactElement, useLayoutEffect, useRef } from 'react'
 import pickHex from '@/helpers/pickHex'
 import useTilt from '@/hooks/useTile'
-import styled from 'styled-components'
+import '../styles/routes/knowledge.scss'
 
 function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSize }: ICard): ReactElement {
+  const ref = useRef<HTMLDivElement>(null)
   const { onMouseMove, onMouseEnter, onMouseLeave, onClick } = useTilt({ styles: cardStyles })
+
+  useLayoutEffect(() => {
+    if (ref.current != null) {
+      ref.current.style.setProperty('--outline-color', mainColor)
+      ref.current.style.setProperty('--width', cardStyles.default.width)
+      ref.current.style.setProperty('--height', cardStyles.default.height)
+      ref.current.style.setProperty('--border-radius', cardStyles.default.borderRadius)
+      ref.current.style.setProperty('--transition', cardStyles.default.transition)
+
+      ref.current.style.setProperty('--bg-img-url', `url(${icon})`)
+      ref.current.style.setProperty('--bg-size', backgroundSize)
+      ref.current.style.setProperty('--after-translate', '25px')
+
+      ref.current.style.setProperty('--first-width', mainColor)
+      ref.current.style.setProperty('--first-hieght', `opacity ${timings[1]} ${bezier}, width ${timings[1]} ${bezier}, height ${timings[1]} ${bezier}, border-radius ${timings[1]} ${bezier}`)
+      ref.current.style.setProperty('--first-border-radius', cardStyles.default.width)
+      ref.current.style.setProperty('--first-outline-color', cardStyles.default.height)
+      ref.current.style.setProperty('--first-transition', cardStyles.default.borderRadius)
+
+      ref.current.style.setProperty('--last-outline-color', mainColor)
+      ref.current.style.setProperty('--last-transition', `opacity ${timings[2]} ${bezier}, width ${timings[2]} ${bezier}, height ${timings[2]} ${bezier}, border-radius ${timings[2]} ${bezier}`)
+      ref.current.style.setProperty('--last-text-shadow', `${secondaryColor} 0 0 20px, ${secondaryColor} 0 0 20px, ${secondaryColor} 0 0 20px, ${secondaryColor} 0 0 20px`)
+      ref.current.style.setProperty('--last-width', cardStyles.default.width)
+      ref.current.style.setProperty('--last-height', cardStyles.default.height)
+      ref.current.style.setProperty('--last-border-radius', cardStyles.default.borderRadius)
+    }
+  }, [])
 
   const handleOnMouseMove = (e: React.MouseEvent<HTMLDivElement, globalThis.MouseEvent>): void => {
     onMouseMove({ card: e.currentTarget, clientX: e.clientX, clientY: e.clientY })
@@ -16,7 +44,6 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
     onMouseEnter(card)
     card.style.setProperty('--after-width', cardStyles.hover.width)
     card.style.setProperty('--after-height', cardStyles.hover.height)
-    card.parentElement!.style.zIndex = cardStyles.hover.zIndex
 
     cardChildren.forEach(child => {
       child.style.width = cardStyles.hover.width
@@ -53,6 +80,7 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
       ? 'clicked'
       : 'hover'
 
+    card.parentElement!.style.zIndex = cardStyles[clicked ? 'hover' : 'default'].zIndex
     card.style.setProperty('--after-width', cardStyles[currentState].width)
     card.style.setProperty('--after-height', cardStyles[currentState].height)
     card.style.setProperty('--after-border-radius', cardStyles[currentState].borderRadius)
@@ -67,18 +95,16 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
   }
 
   return (
-    <ContainerStyled>
-      <CardStyled
-        mainColor={mainColor}
-        icon={icon}
-        backgroundSize={backgroundSize}
+    <div>
+      <div
+        ref={ref}
         onMouseMove={handleOnMouseMove}
         onMouseLeave={handleOnMouseLeave}
         onMouseEnter={handleOnMouseEnter}
         onClick={handleOnClick}
       >
-        <div style={styles.firstChild(mainColor)}/>
-        <div style={styles.lastChild(mainColor, secondaryColor)}>
+        <div/>
+        <div>
           <span style={{ color: mainColor }}>
             {name}
           </span>
@@ -86,8 +112,8 @@ function Card ({ icon, mainColor, secondaryColor, name, percentage, backgroundSi
             {percentage}%
           </span>
         </div>
-      </CardStyled>
-    </ContainerStyled>
+      </div>
+    </div>
   )
 }
 
@@ -126,107 +152,3 @@ const cardStyles = {
     pointerEvents: 'all'
   }
 }
-
-const styles: { container: () => CSSProperties, card: (mainColor: string, icon: string, backgroundSize: string) => CSSProperties, firstChild: (mainColor: string) => CSSProperties, lastChild: (mainColor: string, secondaryColor: string) => CSSProperties } = {
-  container: () => ({
-    width: '200px',
-    height: '200px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    perspective: '1200px'
-  }),
-  card: (mainColor, icon, backgroundSize) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    outline: `1px ${mainColor} solid`,
-    width: cardStyles.default.width,
-    height: cardStyles.default.height,
-    borderRadius: cardStyles.default.borderRadius,
-    transition: cardStyles.default.transition,
-    position: 'absolute',
-    backgroundImage: `url(${icon})`,
-    backgroundPosition: 'center',
-    backgroundSize,
-    backgroundRepeat: 'no-repeat',
-    objectFit: 'cover',
-    transformStyle: 'preserve-3d',
-    cursor: 'pointer'
-  }),
-  firstChild: (mainColor) => ({
-    backdropFilter: 'blur(10px)',
-    transform: 'translateZ(25px)',
-    outline: `1px ${mainColor} solid`,
-    transition: `opacity ${timings[1]} ${bezier}, width ${timings[1]} ${bezier}, height ${timings[1]} ${bezier}, border-radius ${timings[1]} ${bezier}`,
-    width: cardStyles.default.width,
-    height: cardStyles.default.height,
-    borderRadius: cardStyles.default.borderRadius,
-    position: 'absolute',
-    opacity: 0,
-    pointerEvents: 'none',
-    userSelect: 'none'
-  }),
-  lastChild: (mainColor, secondaryColor) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transform: 'translateZ(50px)',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    outline: `1px ${mainColor} solid`,
-    transition: `opacity ${timings[2]} ${bezier}, width ${timings[2]} ${bezier}, height ${timings[2]} ${bezier}, border-radius ${timings[2]} ${bezier}`,
-    textShadow: `${secondaryColor} 0 0 20px, ${secondaryColor} 0 0 20px, ${secondaryColor} 0 0 20px, ${secondaryColor} 0 0 20px`,
-    width: cardStyles.default.width,
-    height: cardStyles.default.height,
-    borderRadius: cardStyles.default.borderRadius,
-    position: 'absolute',
-    opacity: 0,
-    pointerEvents: 'none',
-    userSelect: 'none'
-  })
-}
-
-const ContainerStyled = styled.div`
-  width: 200px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 10000px;
-`
-
-const CardStyled = styled.div<{ mainColor: string, icon: string, backgroundSize: string }>`
-  outline: 1px ${props => props.mainColor} solid;
-  position: absolute;
-  width: ${cardStyles.default.width};
-  height: ${cardStyles.default.height};
-  border-radius: ${cardStyles.default.borderRadius};
-  transition: ${cardStyles.default.transition};
-  transform-style: preserve-3d;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  --after-width: ${cardStyles.default.width};
-  --after-height: ${cardStyles.default.height};
-  --after-border-radius: ${cardStyles.default.borderRadius};
-  --after-translate: 25px;
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: var(--after-width);
-    height: var(--after-height);
-    border-radius: var(--after-border-radius);
-    transition: ${cardStyles.default.transition};
-    background-image: url(${props => props.icon});
-    background-position: center;
-    background-size: ${props => props.backgroundSize};
-    background-repeat: no-repeat;
-    object-fit: cover;
-    transform: translateZ(var(--after-translate));
-  }
-`

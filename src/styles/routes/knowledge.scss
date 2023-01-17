@@ -1,0 +1,87 @@
+.knowledgeCardsContainer {
+  min-height: 100%;
+  padding: 120px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: space-evenly;
+  align-content: space-evenly;
+  justify-content: space-evenly;
+
+  &>div {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 10000px;
+  }
+
+  &>div>div {
+    --after-width: var(--width);
+    --after-height: var(--height);
+    --after-border-radius: var(--border-radius);
+
+    outline: 1px var(--outline-color) solid;
+    position: absolute;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: var(--after-width);
+      height: var(--after-height);
+      border-radius: var(--after-border-radius);
+      transition: var(--transition);
+      background-image: var(--bg-img-url);
+      background-position: center;
+      background-size: var(--bg-size);
+      background-repeat: no-repeat;
+      object-fit: cover;
+      transform: translateZ(var(--after-translate));
+    }
+
+    &>*:first-child {
+      backdrop-filter: blur(10px);
+      transform: translateZ(25px);
+      outline: 1px var(--outline-color) solid;
+      transition: var(--transition);
+      width: var(--first-width);
+      height: var(--first-hieght);
+      border-radius: var(--first-border-radius);
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+
+      &:hover {}
+    }
+
+    &>*:last-child {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateZ(50px);
+      white-space: nowrap;
+      overflow: hidden;
+      outline: 1px var(--last-outline-color) solid;
+      transition: var(--last-transition);
+      text-shadow: var(--last-text-shadow);
+      width: var(--last-width);
+      height: var(--last-height);
+      border-radius: var(--last-border-radius);
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+}

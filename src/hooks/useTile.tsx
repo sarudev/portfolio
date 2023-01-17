@@ -11,19 +11,19 @@ function useTilt ({ styles, config, debug }: IUseTiltConfig = { styles: {}, conf
       width: '150px',
       height: '150px',
       borderRadius: '50%',
-      transition: `transform ${tiltDebug.styles.timing} ${tiltDebug.styles.bezier}, width ${tiltDebug.styles.timing} ${tiltDebug.styles.bezier}, height ${tiltDebug.styles.timing} ${tiltDebug.styles.bezier}, border-radius ${tiltDebug.styles.timing} ${tiltDebug.styles.bezier}`
+      transition: `transform ${tiltDebug.styles.timing!} ${tiltDebug.styles.bezier!}, width ${tiltDebug.styles.timing!} ${tiltDebug.styles.bezier!}, height ${tiltDebug.styles.timing!} ${tiltDebug.styles.bezier!}, border-radius ${tiltDebug.styles.timing!} ${tiltDebug.styles.bezier!}`
     },
     hover: {
       width: '200px',
       height: '200px',
       borderRadius: '50%',
-      transition: `width ${tiltDebug.styles.timing} ${tiltDebug.styles.bezier}, height ${tiltDebug.styles.timing} ${tiltDebug.styles.bezier}, border-radius ${tiltDebug.styles.timing} ${tiltDebug.styles.bezier}`
+      transition: `width ${tiltDebug.styles.timing!} ${tiltDebug.styles.bezier!}, height ${tiltDebug.styles.timing!} ${tiltDebug.styles.bezier!}, border-radius ${tiltDebug.styles.timing!} ${tiltDebug.styles.bezier!}`
     },
     clicked: {
       width: '400px',
       height: '400px',
       borderRadius: '20px',
-      transition: `width ${tiltDebug.styles.timing} ${tiltDebug.styles.bezier}, height ${tiltDebug.styles.timing} ${tiltDebug.styles.bezier}, border-radius ${tiltDebug.styles.timing} ${tiltDebug.styles.bezier}`
+      transition: `width ${tiltDebug.styles.timing!} ${tiltDebug.styles.bezier!}, height ${tiltDebug.styles.timing!} ${tiltDebug.styles.bezier!}, border-radius ${tiltDebug.styles.timing!} ${tiltDebug.styles.bezier!}`
     },
     ...styles
   }

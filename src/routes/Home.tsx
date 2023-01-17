@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { Lines, Line, ComponentSign, Component, Prop } from '@/components/Home'
 import useApplyStyles from '@/hooks/useApplyStyles'
 
-function Home ({ blinkDuration, durationCh, initialDelay, loaded }: IHome): ReactElement<IHome> {
+export default function Home ({ blinkDuration, durationCh, initialDelay, loaded }: IHome): ReactElement<IHome> {
   const ref = useApplyStyles({ blinkDuration, durationCh, initialDelay, loaded })
 
   return (
@@ -29,5 +29,3 @@ function Home ({ blinkDuration, durationCh, initialDelay, loaded }: IHome): Reac
       </Lines>
   )
 }
-
-export default Home

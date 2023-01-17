@@ -5,8 +5,6 @@ import { HeaderStyled, SidebarStyled } from '@/components/Editor'
 import { Outlet, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-const tabsName = ['Home', 'Knowledgement', 'Proyects', 'Contact']
-
 const Container = styled.div<{ loaded: boolean, delay: number }>`
   width: calc(100% - ${p => p.loaded ? '48' : '0'}px);
   height: calc(100% - ${p => p.loaded ? '35' : '0'}px);
@@ -21,7 +19,9 @@ const Container = styled.div<{ loaded: boolean, delay: number }>`
   flex-wrap: wrap;
 `
 
-function Editor ({ children }: { children?: ReactElement }): ReactElement {
+const tabsName = ['Home', 'Knowledge', 'Proyects', 'Contact']
+
+export default function Editor (): ReactElement {
   const homeDelay = useAppSelector(state => state.delay)
   const { pathname } = useLocation()
 
@@ -39,5 +39,3 @@ function Editor ({ children }: { children?: ReactElement }): ReactElement {
     </div>
   )
 }
-
-export default Editor
