@@ -10,7 +10,7 @@ import formatNumber from '@/helpers/formatNumber'
 export default function Proyects (): ReactElement {
   return (
     <div className='cardsContainer'>
-      <Card iconOrText={uno} icon wip bg={'/src/assets/website-uno-api.vercel.app.png'} link={'https://website-uno-api.vercel.app'} />
+      <Card iconOrText={uno} icon wip bg={'/website-uno-api.vercel.app.png'} link={'https://website-uno-api.vercel.app'} />
     </div>
   )
 }
