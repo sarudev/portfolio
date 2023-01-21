@@ -26,7 +26,7 @@
     transition: transform .5s ease;
 
     &#x-2 {
-      display: initial;
+      // display: initial;
       pointer-events: none;
 
       >.text-or-logo {
@@ -35,7 +35,7 @@
     }
 
     &#x-1 {
-      display: initial;
+      // display: initial;
       pointer-events: none;
 
       >.text-or-logo {
@@ -44,7 +44,7 @@
     }
 
     &#x0 {
-      display: initial;
+      // display: initial;
 
       >.text-or-logo {
         box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0) inset;
@@ -52,7 +52,7 @@
     }
 
     &#x1 {
-      display: initial;
+      // display: initial;
       pointer-events: none;
 
       >.text-or-logo {
@@ -61,7 +61,7 @@
     }
 
     &#x2 {
-      display: initial;
+      // display: initial;
       pointer-events: none;
 
       >.text-or-logo {
@@ -70,7 +70,7 @@
     }
 
     &#x-5 {
-      display: none;
+      // display: none;
     }
 
     >.wip {
