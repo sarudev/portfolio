@@ -73,14 +73,14 @@ interface IUseTiltConfig {
   }
 }
 
-interface IContact {
-  id: number
-  first: string
-  last: string
-  avatar: string
-  twitter: string
-  notes: string
-  favorite: boolean
+interface IProyectCard {
+  iconOrText: string
+  icon?: boolean
+  bgUrl: string
+  link: string
+  wip?: boolean
+  id: string
+  trans: string
 }
 
 type IuseApplyStyles = Omit<IHome, 'className'>

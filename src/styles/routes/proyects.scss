@@ -6,11 +6,12 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
+  position: relative;
+  z-index: -20;
 
-  // card
   >.card {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 20px * 2);
     max-width: 500px;
     color: white;
     text-shadow: 0 0 20px black;
@@ -19,9 +20,58 @@
     white-space: nowrap;
     transform: box-shadow .5s ease;
     box-shadow: -1px -120px 126px -50px rgba(0, 0, 0, 0.75) inset;
-    position: relative;
+    position: absolute;
     border-radius: .5em;
     font: system-ui;
+    transition: transform .5s ease;
+
+    &#x-2 {
+      display: initial;
+      pointer-events: none;
+
+      >.text-or-logo {
+        box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.75) inset;
+      }
+    }
+
+    &#x-1 {
+      display: initial;
+      pointer-events: none;
+
+      >.text-or-logo {
+        box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.50) inset;
+      }
+    }
+
+    &#x0 {
+      display: initial;
+
+      >.text-or-logo {
+        box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0) inset;
+      }
+    }
+
+    &#x1 {
+      display: initial;
+      pointer-events: none;
+
+      >.text-or-logo {
+        box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.50) inset;
+      }
+    }
+
+    &#x2 {
+      display: initial;
+      pointer-events: none;
+
+      >.text-or-logo {
+        box-shadow: 200px 200px 400px 200px rgba(0, 0, 0, 0.75) inset;
+      }
+    }
+
+    &#x-5 {
+      display: none;
+    }
 
     >.wip {
       width: 100%;
@@ -44,7 +94,6 @@
       width: 100%;
       height: 100%;
       max-width: 500px;
-      background-image: var(--bg-img-url);
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
@@ -64,7 +113,6 @@
     }
 
     >.text-or-logo {
-      background-image: var(--content-bg-img-url);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 90%;
@@ -73,7 +121,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: opacity .5s ease, filter .5s ease, width .5s ease, height .5s ease;
+      transition: opacity .5s ease, filter .5s ease, width .5s ease, height .5s ease, box-shadow .5s ease;
       transform: translateZ(0);
     }
 
@@ -206,12 +254,26 @@
       opacity: .6;
     }
   }
-}
 
-.enableBlur {
-  filter: blur(20px);
-}
+  >.btn {
+    width: 75px;
+    height: 75px;
+    outline: 5px white solid;
+    border-radius: 50%;
+    position: absolute;
+    text-align: center;
+    background-color: #282828;
 
-.disableBlur {
-  filter: blur(0);
+    &#prev {
+      left: 75px;
+    }
+
+    &#next {
+      right: 75px;
+    }
+
+    &:hover {
+      color: white;
+    }
+  }
 }
