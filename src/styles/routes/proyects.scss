@@ -238,7 +238,7 @@
     &:hover>.text-or-logo {
       height: 75%;
       filter: blur(5px);
-      opacity: .6;
+      opacity: 0;
     }
 
     &:hover>.img {
@@ -251,7 +251,7 @@
 
     &:hover>.wip {
       filter: blur(5px);
-      opacity: .6;
+      opacity: 0;
     }
   }
 

@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import Card from '@/components/Card'
+import Card from '@/components/KnowledgeCard'
 import react from '@/assets/react.svg'
 import javascript from '@/assets/javascript.svg'
 import typescript from '@/assets/typescript.svg'

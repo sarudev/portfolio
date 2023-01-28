@@ -57,7 +57,7 @@ function useApplyStyles ({ blinkDuration, durationCh, initialDelay, loaded }: Iu
       const last = ref.current!.lastChild as HTMLDivElement
       last.style.animation = `blink ${blinkDuration}ms infinite`
     }
-  }, [loaded])
+  })
 
   return ref
 }

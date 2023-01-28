@@ -34,10 +34,6 @@ body {
   pointer-events: all;
 }
 
-.header-tabs * {
-  pointer-events: all;
-}
-
 @keyframes write {
   to {
     width: var(--real-width);
