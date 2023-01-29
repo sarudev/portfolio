@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Editor from '@/routes/Editor'
 import Home from '@/routes/Home'
-import Knowledge from '@/routes/Dropdown'
+import Dropdown from '@/routes/Dropdown'
 import Proyects from '@/routes/Proyects'
 import styled from 'styled-components'
 import tool from '../assets/tool.svg'
@@ -50,7 +50,7 @@ export default function Router (): ReactElement {
         <Route path='/' element={<Editor/>}>
           <Route index element={<Home blinkDuration={blinkDuration} durationCh={durationCh} initialDelay={initialDelay} loaded={false} />}/>
           <Route path='home' element={<Home blinkDuration={blinkDuration} durationCh={durationCh} initialDelay={initialDelay} loaded={true} />}/>
-          <Route path='knowledge' element={<Knowledge />}/>
+          <Route path='dropdown' element={<Dropdown />}/>
           <Route path='proyects' element={<Proyects />}/>
           <Route path='contact' element={<Wip />}/>
           <Route path='greetings' element={<Wip />}/>

@@ -1,5 +1,5 @@
 import React, { ReactElement, memo, SVGProps } from 'react'
-import { ReactComponent } from '@/assets/react.svg'
+import { ReactComponent } from '@/assets/logo-reactjs.svg'
 import { Link, useLocation } from 'react-router-dom'
 
 const Tabs = memo(function Tabs ({ tabsName }: { tabsName: string[] }): ReactElement {

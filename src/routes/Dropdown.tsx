@@ -1,122 +1,68 @@
-import { useAppDispatch, useAppSelector } from '@/components/Redux'
-import { setCount } from '@/redux/reducers/dropdownChildrenCount'
 import React, { ReactElement } from 'react'
-import { ReactComponent as Arrow } from '../assets/arrow-drop-down.svg'
-import '../styles/routes/dropdown.scss'
+import { Collapse, CollapseContainer, ModalCard, Modal, ModalOutlet } from '@/components/Collapse'
+import { ReactComponent as Js } from '../assets/logo-js.svg'
+import { ReactComponent as C } from '../assets/logo-c.svg'
+import { ReactComponent as Cpp } from '../assets/logo-cpp.svg'
+import { ReactComponent as Csharp } from '../assets/logo-csharp.svg'
+import { ReactComponent as Java } from '../assets/logo-java.svg'
+import { ReactComponent as Python } from '../assets/logo-python.svg'
+import { ReactComponent as Lua } from '../assets/logo-lua.svg'
+import { ReactComponent as SQL } from '../assets/logo-sql.svg'
+import { ReactComponent as Mongo } from '../assets/logo-mongo.svg'
+import { ReactComponent as Express } from '../assets/logo-express.svg'
+import { ReactComponent as ReactLogo } from '../assets/logo-reactjs.svg'
+import { ReactComponent as Node } from '../assets/logo-node.svg'
+import { ReactComponent as TypeScript } from '../assets/logo-typescript.svg'
+import { ReactComponent as Redux } from '../assets/logo-redux.svg'
+import { ReactComponent as Jest } from '../assets/logo-jest.svg'
+import { ReactComponent as Git } from '../assets/logo-git.svg'
+import { ReactComponent as Sass } from '../assets/logo-scss.svg'
+import { ReactComponent as Spanish } from '../assets/flag-argentina.svg'
+import { ReactComponent as English } from '../assets/flag-us.svg'
+import { ReactComponent as Japanese } from '../assets/flag-japan.svg'
+import '../styles/routes/collapse.scss'
 
 function Knowledge (): ReactElement {
   return (
-    <DropDownContainer>
-      <DropDown title='Lenguajes' open>
-        a
-      </DropDown>
-      <DropDown title='Librerias/Frameworks'>
-        a
-      </DropDown>
-      <DropDown title='Idiomas'>
-        a
-      </DropDown>
-      <DropDown title='Soft'>
-        a
-      </DropDown>
-    </DropDownContainer>
-  )
-}
-
-interface Child {
-  children: ReactElement | ReactElement[]
-}
-
-function DropDownContainer ({ children }: { children: ReactElement | ReactElement[] }): ReactElement {
-  useAppDispatch()(setCount(Array.isArray(children) ? children.length : 1))
-
-  return (
-    <div className='dropDownContainer'>
-      {children}
-    </div>
-  )
-}
-
-function DropDown ({ title, children, open }: { title: string, children: ReactElement | ReactElement[] | string, open?: boolean }): ReactElement {
-  const count = useAppSelector(p => p.dropdownChildrenCount)
-
-  return (
-    <div
-      className={`dropdown ${open != null && open ? '' : 'closed'}`}
-      style={{
-        height: `calc(100% - ${(count - 1) * 40}px)`
-      }}
-    >
-      <button
-        className="interaction-bar"
-        onClick={e => {
-          const parent = e.currentTarget.parentElement!
-          const parentSiblings = parent.parentElement!.childNodes as NodeListOf<HTMLDivElement>
-
-          parent.classList.toggle('closed')
-          parent.querySelector('.arrow')!.classList.toggle('rotate')
-
-          parentSiblings.forEach(e => {
-            if (!e.isEqualNode(parent)) {
-              e.classList.add('closed')
-              e.querySelector('.arrow')!.classList.remove('rotate')
-            }
-          })
-        }}
-      >
-        <div className={`arrow ${open != null && open ? 'rotate' : ''}`}>
-          <Arrow className='svg' />
-        </div>
-        <div className="title">
-          {title}
-        </div>
-      </button>
-      <div className="content">
-        {children}
-      </div>
-    </div>
-  )
-}
-
-function DropDownContent ({ children }: Child): ReactElement {
-  return (
-    <></>
-  )
-}
-
-function Menu ({ count }: { count: number }): ReactElement {
-  return (
-    <div className='dropdown'
-      onClick={e => {
-        const arrow = e.currentTarget.querySelector('.arrow')!
-        arrow.classList.toggle('rotate')
-        e.currentTarget.classList.toggle('open')
-      }}
-    >
-      <div className="select">
-        <div className='arrow'>
-          <Arrow />
-        </div>
-        <div className='title'>
-          Title
-        </div>
-      </div>
-      <div className='content' style={{
-        // height: `calc(100% - ${(count - 1) * 35}px)`
-      }}>
-
-      </div>
-    </div>
+    <>
+      <ModalOutlet />
+      <CollapseContainer>
+        <Collapse title='Programming Languages' open>
+          <ModalCard title='JavaScript' Icon={Js}>
+            <Modal Icon={Js} title={'Title'}>
+              <p>a</p>
+            </Modal>
+          </ModalCard>
+          <ModalCard title='C' Icon={C} />
+          <ModalCard title='C++' Icon={Cpp} />
+          <ModalCard title='C#' Icon={Csharp} />
+          <ModalCard title='Java' Icon={Java} />
+          <ModalCard title='Python' Icon={Python} />
+          <ModalCard title='Lua' Icon={Lua} />
+          <ModalCard title='SQL' Icon={SQL} />
+        </Collapse>
+        <Collapse title='Libraries/Frameworks'>
+          <ModalCard title='Mongo' Icon={Mongo} />
+          <ModalCard title='Express' Icon={Express} />
+          <ModalCard title='React' Icon={ReactLogo} />
+          <ModalCard title='Node' Icon={Node} />
+          <ModalCard title='TypeScript' Icon={TypeScript} />
+          <ModalCard title='Redux' Icon={Redux} />
+          <ModalCard title='Jest' Icon={Jest} />
+          <ModalCard title='Git' Icon={Git} />
+          <ModalCard title='Sass' Icon={Sass} />
+        </Collapse>
+        <Collapse title='Languages'>
+          <ModalCard title='Español' Icon={Spanish} />
+          <ModalCard title='English' Icon={English} />
+          <ModalCard title='日本語' Icon={Japanese} />
+        </Collapse>
+        <Collapse title='Soft Skills'>
+          <ModalCard title='Title' Icon={Sass} />
+        </Collapse>
+      </CollapseContainer>
+    </>
   )
 }
 
 export default Knowledge
-
-// <DropDownContainer>
-//   <DropDown>
-//     <DropDownContent />
-//   </DropDown>
-//   <DropDown>
-//     <DropDownContent />
-//   </DropDown>
-// </DropDownContainer>
