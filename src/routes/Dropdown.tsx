@@ -102,7 +102,15 @@ function Knowledge (): ReactElement {
         <Collapse title='Soft Skills'>
           <ModalCard title='Title' Icon={Sass} level={'very basic'}>
             <Modal title='Title'>
-              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              <>
+                <div>very basic             14</div>
+                <div>basic                  28</div>
+                <div>basic+                 42</div>
+                <div>intermediate           56</div>
+                <div>intermediate+          70</div>
+                <div>advanced               84</div>
+                <div>very advanced          98</div>
+              </>
             </Modal>
           </ModalCard>
         </Collapse>
