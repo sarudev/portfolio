@@ -35,72 +35,76 @@ function Knowledge (): ReactElement {
       <CollapseContainer>
         <Collapse title='Programming Languages' open>
           <ModalCard title='JavaScript' Icon={Js} level={'advanced'} >
-            <Modal Icon={Js} title='JavaScript' level={'advanced'} description={'description'} href={'https://developer.mozilla.org/en-US/docs/Web/JavaScript'} />
+            <Modal Icon={Js} title='JavaScript' level={'advanced'} href={'https://developer.mozilla.org/en-US/docs/Web/JavaScript'} />
           </ModalCard>
           <ModalCard title='C' Icon={C} level={'very basic'} >
-            <Modal Icon={C} level={'very basic'} description={'description'} />
+            <Modal Icon={C} title='C' level={'very basic'} />
           </ModalCard>
           <ModalCard title='C++' Icon={Cpp} level={'very basic'} >
-            <Modal Icon={Cpp} level={'very basic'} description={'description'} />
+            <Modal Icon={Cpp} title='C++' level={'very basic'} />
           </ModalCard>
           <ModalCard title='C#' Icon={Csharp} level={'very basic'} >
-            <Modal Icon={Csharp} level={'very basic'} description={'description'} />
+            <Modal Icon={Csharp} title='C#' level={'very basic'} />
           </ModalCard>
           <ModalCard title='Java' Icon={Java} level={'very basic'} >
-            <Modal Icon={Java} level={'very basic'} description={'description'} />
+            <Modal Icon={Java} title='Java' level={'very basic'} />
           </ModalCard>
           <ModalCard title='Python' Icon={Python} level={'very basic'} >
-            <Modal Icon={Python} level={'very basic'} description={'description'} />
+            <Modal Icon={Python} title='Python' level={'very basic'} />
           </ModalCard>
           <ModalCard title='Lua' Icon={Lua} level={'very basic'} >
-            <Modal Icon={Lua} level={'very basic'} description={'description'} />
+            <Modal Icon={Lua} title='Lua' level={'very basic'} />
           </ModalCard>
           <ModalCard title='SQL' Icon={SQL} level={'very basic'} >
-            <Modal Icon={SQL} level={'very basic'} description={'description'} />
+            <Modal Icon={SQL} title='SQL' level={'very basic'} />
           </ModalCard>
         </Collapse>
         <Collapse title='Libraries/Frameworks'>
           <ModalCard title='Mongo' Icon={Mongo} level={'very basic'} >
-            <Modal Icon={Mongo} level={'very basic'} description={'description'} />
+            <Modal Icon={Mongo} title='Mongo' level={'very basic'} />
           </ModalCard>
           <ModalCard title='Express' Icon={Express} level={'very basic'} >
-            <Modal Icon={Express} level={'very basic'} description={'description'} />
+            <Modal Icon={Express} title='Express' level={'very basic'} />
           </ModalCard>
           <ModalCard title='React' Icon={ReactLogo} level={'very basic'} >
-            <Modal Icon={ReactLogo} level={'very basic'} description={'description'} />
+            <Modal Icon={ReactLogo} title='React' level={'very basic'} />
           </ModalCard>
           <ModalCard title='Node' Icon={Node} level={'very basic'} >
-            <Modal Icon={Node} level={'very basic'} description={'description'} />
+            <Modal Icon={Node} title='Node' level={'very basic'} />
           </ModalCard>
           <ModalCard title='TypeScript' Icon={TypeScript} level={'very basic'} >
-            <Modal Icon={TypeScript} level={'very basic'} description={'description'} />
+            <Modal Icon={TypeScript} title='TypeScript' level={'very basic'} />
           </ModalCard>
           <ModalCard title='Redux' Icon={Redux} level={'very basic'} >
-            <Modal Icon={Redux} level={'very basic'} description={'description'} />
+            <Modal Icon={Redux} title='Redux' level={'very basic'} />
           </ModalCard>
           <ModalCard title='Jest' Icon={Jest} level={'very basic'} >
-            <Modal Icon={Jest} level={'very basic'} description={'description'} />
+            <Modal Icon={Jest} title='Jest' level={'very basic'} />
           </ModalCard>
           <ModalCard title='Git' Icon={Git} level={'very basic'} >
-            <Modal Icon={Git} level={'very basic'} description={'description'} />
+            <Modal Icon={Git} title='Git' level={'very basic'} />
           </ModalCard>
           <ModalCard title='Sass' Icon={Sass} level={'very basic'} >
-            <Modal Icon={Sass} level={'very basic'} description={'description'} />
+            <Modal Icon={Sass} title='Sass' level={'very basic'} />
           </ModalCard>
         </Collapse>
         <Collapse title='Languages'>
           <ModalCard title='Español' Icon={Spanish} level={'very basic'} >
-            <Modal Icon={Spanish} level={'very basic'} description={'description'} />
+            <Modal Icon={Spanish} title='Español' level={'very basic'} />
           </ModalCard>
           <ModalCard title='English' Icon={English} level={'very basic'} >
-            <Modal Icon={English} level={'very basic'} description={'description'} />
+            <Modal Icon={English} title='English' level={'very basic'} />
           </ModalCard>
           <ModalCard title='日本語' Icon={Japanese} level={'very basic'} >
-            <Modal Icon={Japanese} level={'very basic'} description={'description'} />
+            <Modal Icon={Japanese} title='日本語' level={'very basic'} />
           </ModalCard>
         </Collapse>
         <Collapse title='Soft Skills'>
-          <ModalCard title='Title' Icon={Sass} level={'very basic'} />
+          <ModalCard title='Title' Icon={Sass} level={'very basic'}>
+            <Modal title='Title'>
+              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            </Modal>
+          </ModalCard>
         </Collapse>
       </CollapseContainer>
     </>

@@ -90,7 +90,7 @@ export function ModalCard ({ title, Icon, children, level }: { title: string, le
   )
 }
 
-export function Modal ({ Icon, level, description, href, title }: ModalData): ReactElement {
+export function Modal ({ Icon, level, href, title, children }: Omit<ModalData, 'description'> & { children?: string | ReactElement }): ReactElement {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -99,7 +99,7 @@ export function Modal ({ Icon, level, description, href, title }: ModalData): Re
       eventEmitter.dispatch('modal', {
         Icon,
         level,
-        description,
+        description: children != null ? <>{children}</> : undefined,
         href,
         title
       } as ModalData)
@@ -111,9 +111,7 @@ export function Modal ({ Icon, level, description, href, title }: ModalData): Re
 
 export function ModalOutlet (): ReactElement {
   const [data, setData] = useState<ModalData>({
-    Icon: Arrow,
-    level: 'very basic',
-    description: 'Arrow description'
+    title: ''
   })
 
   useLayoutEffect(() => {
@@ -135,39 +133,41 @@ export function ModalOutlet (): ReactElement {
       }}
     >
       <div className='modalContent'>
-        <div className="icon">
+        <div className="title-container">
           {data.href != null
-            ? <a href={data.href} target='_blank' className='link-href' rel="noreferrer">
-              <Link />
-            </a>
-            : <div className='link' />
+            ? (
+                <a href={data.href} target='_blank' className='link-href' rel="noreferrer">
+                  <Link />
+                </a>
+              )
+            : (
+                <div className="link" />
+              )
           }
-          <div className='logo'>
-            <data.Icon />
+          <div className="title">
+            {data.title}
           </div>
-          <button className='cross'
-            onClick={(e) => {
-              (document.querySelector('#modalOutlet') as HTMLDivElement).classList.remove('visible')
-            }}
-          >
+          <button className='cross' onClick={(e) => (document.querySelector('#modalOutlet') as HTMLDivElement).classList.remove('visible')} >
             <Cross />
           </button>
         </div>
-        {data.href != null
-          ? <div className="title">
-            {data.title}
+        {data.Icon != null && (
+          <div className="icon" style={{ borderBottom: data.level != null || data.description != null ? '1px #1e1e1e solid' : '' }}>
+            <data.Icon />
           </div>
-          : <></>
-        }
-        <div className='level'>
-          <div style={{ color: `rgb(${pickHex([0, 255, 0], [255, 0, 0], levelPercentage[data.level] / 100).toString()})` }}>
-            {`${data.level.split(data.level[1])[0].toUpperCase()}${data.level.substring(1, data.level.length)}`}
+        )}
+        {data.level != null && (
+          <div className='level' style={{ borderBottom: data.description != null ? '1px #1e1e1e solid' : '' }}>
+            <div style={{ color: `rgb(${pickHex([0, 255, 0], [255, 0, 0], levelPercentage[data.level] / 100).toString()})` }}>
+              {`${data.level.split(data.level[1])[0].toUpperCase()}${data.level.substring(1, data.level.length)}`}
+            </div>
           </div>
-          <div style={{ fontSize: 20 }}>level</div>
-        </div>
-        <div className='description'>
-          {data.description}
-        </div>
+        )}
+        {data.description != null && (
+          <div className="description">
+            {data.description}
+          </div>
+        )}
       </div>
     </div>
   )
