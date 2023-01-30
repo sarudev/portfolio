@@ -21,6 +21,7 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/no-dynamic-delete': 'off',
-    '@typescript-eslint/consistent-type-assertions': 'off'
+    '@typescript-eslint/consistent-type-assertions': 'off',
+    'react/display-name': 'off'
   }
 }

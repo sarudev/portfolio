@@ -29,33 +29,69 @@ function Knowledge (): ReactElement {
       <CollapseContainer>
         <Collapse title='Programming Languages' open>
           <ModalCard title='JavaScript' Icon={Js}>
-            <Modal Icon={Js} title={'Title'}>
-              <p>a</p>
-            </Modal>
+            <Modal Icon={Js} level={'high'} description={'description'} href={'https://developer.mozilla.org/en-US/docs/Web/JavaScript'} />
           </ModalCard>
-          <ModalCard title='C' Icon={C} />
-          <ModalCard title='C++' Icon={Cpp} />
-          <ModalCard title='C#' Icon={Csharp} />
-          <ModalCard title='Java' Icon={Java} />
-          <ModalCard title='Python' Icon={Python} />
-          <ModalCard title='Lua' Icon={Lua} />
-          <ModalCard title='SQL' Icon={SQL} />
+          <ModalCard title='C' Icon={C}>
+            <Modal Icon={C} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='C++' Icon={Cpp}>
+            <Modal Icon={Cpp} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='C#' Icon={Csharp}>
+            <Modal Icon={Csharp} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='Java' Icon={Java}>
+            <Modal Icon={Java} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='Python' Icon={Python}>
+            <Modal Icon={Python} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='Lua' Icon={Lua}>
+            <Modal Icon={Lua} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='SQL' Icon={SQL}>
+            <Modal Icon={SQL} level={'low'} description={'description'} />
+          </ModalCard>
         </Collapse>
         <Collapse title='Libraries/Frameworks'>
-          <ModalCard title='Mongo' Icon={Mongo} />
-          <ModalCard title='Express' Icon={Express} />
-          <ModalCard title='React' Icon={ReactLogo} />
-          <ModalCard title='Node' Icon={Node} />
-          <ModalCard title='TypeScript' Icon={TypeScript} />
-          <ModalCard title='Redux' Icon={Redux} />
-          <ModalCard title='Jest' Icon={Jest} />
-          <ModalCard title='Git' Icon={Git} />
-          <ModalCard title='Sass' Icon={Sass} />
+          <ModalCard title='Mongo' Icon={Mongo}>
+            <Modal Icon={Mongo} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='Express' Icon={Express}>
+            <Modal Icon={Express} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='React' Icon={ReactLogo}>
+            <Modal Icon={ReactLogo} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='Node' Icon={Node}>
+            <Modal Icon={Node} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='TypeScript' Icon={TypeScript}>
+            <Modal Icon={TypeScript} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='Redux' Icon={Redux}>
+            <Modal Icon={Redux} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='Jest' Icon={Jest}>
+            <Modal Icon={Jest} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='Git' Icon={Git}>
+            <Modal Icon={Git} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='Sass' Icon={Sass}>
+            <Modal Icon={Sass} level={'low'} description={'description'} />
+          </ModalCard>
         </Collapse>
         <Collapse title='Languages'>
-          <ModalCard title='Español' Icon={Spanish} />
-          <ModalCard title='English' Icon={English} />
-          <ModalCard title='日本語' Icon={Japanese} />
+          <ModalCard title='Español' Icon={Spanish}>
+            <Modal Icon={Spanish} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='English' Icon={English}>
+            <Modal Icon={English} level={'low'} description={'description'} />
+          </ModalCard>
+          <ModalCard title='日本語' Icon={Japanese}>
+            <Modal Icon={Japanese} level={'low'} description={'description'} />
+          </ModalCard>
         </Collapse>
         <Collapse title='Soft Skills'>
           <ModalCard title='Title' Icon={Sass} />

@@ -29,7 +29,6 @@
       <stop offset="1" stop-color="#69b655" />
     </linearGradient>
   </defs>
-  <title>file_type_mongo</title>
   <path
     d="M16.62,30l-.751-.249s.1-3.8-1.275-4.067c-.9-1.048.133-44.741,3.423-.149a2.712,2.712,0,0,0-1.333,1.523A14.1,14.1,0,0,0,16.62,30Z"
     style="fill:url(#a)" />

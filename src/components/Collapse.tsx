@@ -1,10 +1,13 @@
+import pickHex from '@/helpers/pickHex'
 import React, { ReactElement, useRef, useState, useLayoutEffect, useEffect } from 'react'
 import { ReactComponent as Arrow } from '../assets/arrow.svg'
 import { eventEmitter } from '../helpers/eventEmitter'
+import { ReactComponent as Cross } from '../assets/cross.svg'
+import { ReactComponent as Link } from '../assets/link.svg'
 
 export function CollapseContainer ({ children }: { children: ReactElement<typeof Collapse> | Array<ReactElement<typeof Collapse>> }): ReactElement {
   return (
-    <div className='collapseContainer' data-id={0} data-childcount={Array.isArray(children) ? children.length : 1}>
+    <div className='collapseContainer' data-childcount={Array.isArray(children) ? children.length : 1}>
       {children}
     </div>
   )
@@ -15,15 +18,7 @@ export function Collapse ({ title, children, open }: { title: string, children: 
   const [count, setCount] = useState(0)
 
   useLayoutEffect(() => {
-    const collapse = ref.current!
-    const container = collapse.parentElement as HTMLDivElement
-    setCount(Number(container.dataset.childcount))
-
-    container.childNodes.forEach((e, i) => {
-      if (e.isEqualNode(collapse)) {
-        collapse.dataset.id = `${container.dataset.id!}${i}`
-      }
-    })
+    setCount(Number(ref.current!.parentElement!.dataset.childcount))
   }, [])
 
   return (
@@ -70,18 +65,6 @@ export function Collapse ({ title, children, open }: { title: string, children: 
 export function ModalCard ({ title, Icon, children }: { title: string, Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>, children?: ReactElement<typeof Modal> }): ReactElement {
   const ref = useRef<HTMLButtonElement>(null)
 
-  useLayoutEffect(() => {
-    const card = ref.current!
-    const container = card.parentElement! as HTMLDivElement
-    const collapse = card.parentElement!.parentElement!.parentElement as HTMLDivElement
-
-    container.childNodes.forEach((e, i) => {
-      if (e.isEqualNode(card)) {
-        card.dataset.id = `${collapse.dataset.id!}${i}`
-      }
-    })
-  }, [])
-
   return (
     <button ref={ref} className='modalCard'>
       <div className='logo'>
@@ -95,31 +78,41 @@ export function ModalCard ({ title, Icon, children }: { title: string, Icon: Rea
   )
 }
 
-export function Modal ({ title, Icon, children }: { title: string, Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>, children: ReactElement<any> }): ReactElement {
+export function Modal ({ Icon, level, description, href }: ModalData): ReactElement {
   const ref = useRef<HTMLDivElement>(null)
 
-  useLayoutEffect(() => {
-    const modal = ref.current!
-    const card = modal.parentElement!
+  useEffect(() => {
+    const card = ref.current!.parentElement!
     card.onclick = () => {
       eventEmitter.dispatch('modal', {
-        id: ref.current!.parentElement!.dataset.id,
-        title,
         Icon,
-        children
-      })
+        level,
+        description,
+        href
+      } as ModalData)
     }
   }, [])
 
-  return <div ref={ref} style={{ position: 'absolute', width: 0, height: 0 }}></div>
+  return <div ref={ref}></div>
+}
+
+const levelColor = {
+  low: 0,
+  intermediate: 50,
+  high: 100
 }
 
 export function ModalOutlet (): ReactElement {
-  const [event, setEvent] = useState(false)
+  const [data, setData] = useState<ModalData>({
+    Icon: Arrow,
+    level: 'high',
+    description: 'Arrow description'
+  })
 
-  useEffect(() => {
-    eventEmitter.subscribe('modal', (data) => {
-      setEvent(true)
+  useLayoutEffect(() => {
+    eventEmitter.subscribe('modal', (modalData: ModalData) => {
+      (document.querySelector('#modalOutlet') as HTMLDivElement).classList.add('visible')
+      setData(modalData)
     })
 
     return () => {
@@ -131,35 +124,39 @@ export function ModalOutlet (): ReactElement {
     <div
       id='modalOutlet'
       onClick={(e) => {
-        if ((e.target as HTMLElement).id === 'modalOutlet') {
-          setEvent(false)
-        }
-      }}
-      style={{
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        zIndex: 10000,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#00000099',
-        opacity: event ? 1 : 0,
-        pointerEvents: event ? 'all' : 'none',
-        transition: 'all .2s ease'
+        if ((e.target as HTMLElement).id === 'modalOutlet') (e.target as HTMLDivElement).classList.remove('visible')
       }}
     >
-      <div style={{
-        width: 300,
-        height: 300,
-        outline: '1px red solid',
-        display: 'flex',
-        alignItems: 'center',
-        textAlign: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'blue'
-      }}>
-        modal no terminado xd
+      <div className='modalContent'>
+        <div className="icon">
+          {data.href != null
+            ? <a href={data.href} target='_blank' className='link-href' rel="noreferrer">
+              <Link />
+            </a>
+            : <div className='link' />
+          }
+          <div className='logo'>
+            <data.Icon />
+          </div>
+          <button className='cross'
+            onClick={(e) => {
+              const btn = e.currentTarget
+              const modalOutlet = btn.parentElement!.parentElement!.parentElement!
+              if (modalOutlet.id === 'modalOutlet') modalOutlet.classList.remove('visible')
+            }}
+          >
+            <Cross />
+          </button>
+        </div>
+        <div className='level'>
+          <div style={{ color: `rgb(${pickHex([0, 255, 0], [255, 0, 0], levelColor[data.level]).toString()})` }}>
+            {`${data.level.split(data.level[1])[0].toUpperCase()}${data.level.substring(1, data.level.length)}`}
+          </div>
+          <div style={{ fontSize: 20 }}>level</div>
+        </div>
+        <div className='description'>
+          {data.description}
+        </div>
       </div>
     </div>
   )
