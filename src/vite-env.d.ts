@@ -85,9 +85,11 @@ interface IProyectCard {
 
 interface ModalData {
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
-  level: 'low' | 'intermediate' | 'high'
+  levelText: string
+  levelValue: number
   description: string
   href?: string
+  title?: string
 }
 
 type IuseApplyStyles = Omit<IHome, 'className'>

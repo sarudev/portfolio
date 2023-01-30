@@ -62,7 +62,7 @@ export function Collapse ({ title, children, open }: { title: string, children: 
   )
 }
 
-export function ModalCard ({ title, Icon, children }: { title: string, Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>, children?: ReactElement<typeof Modal> }): ReactElement {
+export function ModalCard ({ title, Icon, children, levelText, levelValue }: { title: string, levelText: string, levelValue: number, Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>, children?: ReactElement<typeof Modal> }): ReactElement {
   const ref = useRef<HTMLButtonElement>(null)
 
   return (
@@ -70,15 +70,17 @@ export function ModalCard ({ title, Icon, children }: { title: string, Icon: Rea
       <div className='logo'>
         <Icon />
       </div>
-      <div className='title'>
-        {title}
+      <div className='level'>
+        <div style={{ color: `rgb(${pickHex([0, 255, 0], [255, 0, 0], levelValue / 100).toString()})` }}>
+          {`${levelText.split(levelText[1])[0].toUpperCase()}${levelText.substring(1, levelText.length)}`}
+        </div>
       </div>
       {children}
     </button>
   )
 }
 
-export function Modal ({ Icon, level, description, href }: ModalData): ReactElement {
+export function Modal ({ Icon, levelText, levelValue, description, href, title }: ModalData): ReactElement {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -86,26 +88,23 @@ export function Modal ({ Icon, level, description, href }: ModalData): ReactElem
     card.onclick = () => {
       eventEmitter.dispatch('modal', {
         Icon,
-        level,
+        levelText,
+        levelValue,
         description,
-        href
+        href,
+        title
       } as ModalData)
     }
-  }, [])
+  })
 
   return <div ref={ref}></div>
-}
-
-const levelColor = {
-  low: 0,
-  intermediate: 50,
-  high: 100
 }
 
 export function ModalOutlet (): ReactElement {
   const [data, setData] = useState<ModalData>({
     Icon: Arrow,
-    level: 'high',
+    levelText: 'low',
+    levelValue: 0,
     description: 'Arrow description'
   })
 
@@ -140,17 +139,21 @@ export function ModalOutlet (): ReactElement {
           </div>
           <button className='cross'
             onClick={(e) => {
-              const btn = e.currentTarget
-              const modalOutlet = btn.parentElement!.parentElement!.parentElement!
-              if (modalOutlet.id === 'modalOutlet') modalOutlet.classList.remove('visible')
+              (document.querySelector('#modalOutlet') as HTMLDivElement).classList.remove('visible')
             }}
           >
             <Cross />
           </button>
         </div>
+        {data.href != null
+          ? <div className="title">
+            {data.title}
+          </div>
+          : <></>
+        }
         <div className='level'>
-          <div style={{ color: `rgb(${pickHex([0, 255, 0], [255, 0, 0], levelColor[data.level]).toString()})` }}>
-            {`${data.level.split(data.level[1])[0].toUpperCase()}${data.level.substring(1, data.level.length)}`}
+          <div style={{ color: `rgb(${pickHex([0, 255, 0], [255, 0, 0], data.levelValue / 100).toString()})` }}>
+            {`${data.levelText.split(data.levelText[1])[0].toUpperCase()}${data.levelText.substring(1, data.levelText.length)}`}
           </div>
           <div style={{ fontSize: 20 }}>level</div>
         </div>
