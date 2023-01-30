@@ -62,7 +62,17 @@ export function Collapse ({ title, children, open }: { title: string, children: 
   )
 }
 
-export function ModalCard ({ title, Icon, children, levelText, levelValue }: { title: string, levelText: string, levelValue: number, Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>, children?: ReactElement<typeof Modal> }): ReactElement {
+const levelPercentage = {
+  'very basic': 14,
+  basic: 28,
+  'basic+': 42,
+  intermediate: 56,
+  'intermediate+': 70,
+  advanced: 84,
+  'very advanced': 98
+}
+
+export function ModalCard ({ title, Icon, children, level }: { title: string, level: Level, Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>, children?: ReactElement<typeof Modal> }): ReactElement {
   const ref = useRef<HTMLButtonElement>(null)
 
   return (
@@ -71,8 +81,8 @@ export function ModalCard ({ title, Icon, children, levelText, levelValue }: { t
         <Icon />
       </div>
       <div className='level'>
-        <div style={{ color: `rgb(${pickHex([0, 255, 0], [255, 0, 0], levelValue / 100).toString()})` }}>
-          {`${levelText.split(levelText[1])[0].toUpperCase()}${levelText.substring(1, levelText.length)}`}
+        <div style={{ color: `rgb(${pickHex([0, 255, 0], [255, 0, 0], levelPercentage[level] / 100).toString()})` }}>
+          {`${level.split(level[1])[0].toUpperCase()}${level.substring(1, level.length)}`}
         </div>
       </div>
       {children}
@@ -80,7 +90,7 @@ export function ModalCard ({ title, Icon, children, levelText, levelValue }: { t
   )
 }
 
-export function Modal ({ Icon, levelText, levelValue, description, href, title }: ModalData): ReactElement {
+export function Modal ({ Icon, level, description, href, title }: ModalData): ReactElement {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -88,8 +98,7 @@ export function Modal ({ Icon, levelText, levelValue, description, href, title }
     card.onclick = () => {
       eventEmitter.dispatch('modal', {
         Icon,
-        levelText,
-        levelValue,
+        level,
         description,
         href,
         title
@@ -103,8 +112,7 @@ export function Modal ({ Icon, levelText, levelValue, description, href, title }
 export function ModalOutlet (): ReactElement {
   const [data, setData] = useState<ModalData>({
     Icon: Arrow,
-    levelText: 'low',
-    levelValue: 0,
+    level: 'very basic',
     description: 'Arrow description'
   })
 
@@ -152,8 +160,8 @@ export function ModalOutlet (): ReactElement {
           : <></>
         }
         <div className='level'>
-          <div style={{ color: `rgb(${pickHex([0, 255, 0], [255, 0, 0], data.levelValue / 100).toString()})` }}>
-            {`${data.levelText.split(data.levelText[1])[0].toUpperCase()}${data.levelText.substring(1, data.levelText.length)}`}
+          <div style={{ color: `rgb(${pickHex([0, 255, 0], [255, 0, 0], levelPercentage[data.level] / 100).toString()})` }}>
+            {`${data.level.split(data.level[1])[0].toUpperCase()}${data.level.substring(1, data.level.length)}`}
           </div>
           <div style={{ fontSize: 20 }}>level</div>
         </div>

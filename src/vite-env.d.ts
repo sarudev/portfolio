@@ -83,10 +83,11 @@ interface IProyectCard {
   trans: string
 }
 
+type Level = 'very basic' | 'basic' | 'basic+' | 'intermediate' | 'intermediate+' | 'advanced' | 'very advanced'
+
 interface ModalData {
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
-  levelText: string
-  levelValue: number
+  level: Level
   description: string
   href?: string
   title?: string
