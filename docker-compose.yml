@@ -4,6 +4,6 @@ services:
     container_name: portfolio
     image: portfolio-frontend
     ports:
-      - "3000:80"
+      - "7278:80"
     restart: unless-stopped
     build: .
