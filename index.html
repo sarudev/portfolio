@@ -2,13 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
+    <meta name="description" content="Portfolio de José Coria — Desarrollador web full stack apasionado por crear experiencias digitales limpias, rápidas y funcionales." />
+    <title>José Coria | Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="/icon.png" />
     <link href="/src/index.css" rel="stylesheet" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="José Coria | Portfolio" />
+    <meta property="og:description" content="Desarrollador web full stack — proyectos, experiencia y contacto." />
+    <meta property="og:image" content="/icon.png" />
+    <meta property="og:url" content="https://me.sarudev.com.ar" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="José Coria | Portfolio" />
+    <meta name="twitter:description" content="Desarrollador web full stack — proyectos, experiencia y contacto." />
+    <meta name="twitter:image" content="/icon.png" />
+
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="apple-touch-icon" href="/icon192.png" />
+    <meta name="author" content="José Coria" />
+    <link rel="canonical" href="https://me.sarudev.com.ar" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "José Coria",
+        "url": "https://me.sarudev.com.ar",
+        "sameAs": ["https://github.com/sarudev", "https://www.linkedin.com/in/josé-coria"],
+        "jobTitle": "Desarrollador Web Full Stack"
+      }
+    </script>
   </body>
 </html>
